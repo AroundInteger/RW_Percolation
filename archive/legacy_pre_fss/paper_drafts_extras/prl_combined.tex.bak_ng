@@ -1,0 +1,423 @@
+% ======================================================================
+%  COMBINED review/preprint draft:
+%    PRL Letter  ->  references  ->  Supplemental Material
+%  Single shared bibliography; SM set one-column for readability.
+%  (For final APS submission, use the standalone prl_letter.tex and
+%   supplemental.tex instead — APS wants them as separate files.)
+% ======================================================================
+\documentclass[aps,prl,twocolumn,superscriptaddress,floatfix,nofootinbib]{revtex4-2}
+
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\usepackage{bm}
+\usepackage{booktabs}
+\usepackage[colorlinks=true,allcolors=blue]{hyperref}
+
+\graphicspath{{figures_v2/}{./}}
+
+\newcommand{\msd}{\langle r^2(t)\rangle}
+\newcommand{\pc}{p_c}
+\newcommand{\pcp}{p_c'}
+\newcommand{\kap}{\kappa}
+\newcommand{\nueff}{\nu_{\mathrm{eff}}}
+
+\begin{document}
+
+\title{Nucleation density programmes the viscoelastic gel point of a percolation network}
+
+\author{A.~Author}
+\author{B.~Author}
+\author{C.~Author}
+\author{D.~Author}
+\affiliation{[Affiliation], [Institution], [City], [Country]}
+
+\date{\today}
+
+\begin{abstract}
+Passive microrheology locates the viscoelastic gel point through the Winter--Chambon condition $\alpha=0.5$. Using three-dimensional random walks in the void of site-percolation lattices, we identify this gel point with the void-percolation transition, $\pcp \simeq 1-\pc$, and show that a single nucleation-density parameter $\kap$ tunes it continuously from $0.68$ towards unity. Finite-size scaling yields an effective exponent $\nu\approx1.6$ with no systematic dependence on $\kap$ for $\kap\le0.8$, distinct from static percolation, indicating that nucleation density shifts the gel point while preserving its critical character.
+\end{abstract}
+
+\maketitle
+
+% ===================== MAIN LETTER =====================
+Gelation---the transition of a polymer solution or colloidal suspension from a viscous fluid to a viscoelastic solid---is characterised by a gel point $\pcp$ at which the loss tangent $\tan\delta = G''/G'$ becomes frequency independent and equal to unity~\cite{Chambon1987,Winter1987}. In the Winter--Chambon picture this is the phase angle $\delta=45^{\circ}$ and a power-law mean squared displacement (MSD) $\msd\propto t^{0.5}$, both accessible by passive microrheology through the Generalised Stokes--Einstein Relation (GSER)~\cite{Mason1995,Mason2000,Squires2010fluid}. The gel point is routinely treated as a fixed property of composition---set by concentration, cross-link density, and temperature~\cite{Rubinstein2003,Larson1999}. What is rarely asked is whether it also depends on \emph{how} the network forms: on the spatial growth dynamics of the cluster itself, which in real colloidal and biopolymer gels range from open fractal aggregates to compact space-filling domains~\cite{Trappe2001,Gibaud2012,Ng2016}.
+
+Microrheology has previously been used to locate the gel point of real gels~\cite{Larsen2008,Corrigan2009}, and growth or nucleation rules are known to shift the percolation threshold and even change the order of the transition~\cite{Anderson1988,Roy2017,Roy2018,DSouzaNagler2015}. What has been missing is a single picture in which the passive-microrheology gel point is \emph{identified} with the void-percolation transition and then moved continuously by one morphological parameter---which is what the nucleation density $\kap$ provides here.
+
+Here we show, by direct simulation, that the gel point is set by growth dynamics and can be programmed continuously through a single nucleation-density parameter, while its effective critical character is preserved. The approach is grounded in how microrheology actually works: probe particles diffuse through the \emph{void} (fluid) phase of the network, not through the network~\cite{deBruyn2013,Rich2011,Oppong2006}. We therefore place random walkers on the unoccupied sublattice of an $L\times L\times L$ simple cubic lattice, sweep the occupation probability $p$, and extract the anomalous-diffusion exponent $\alpha(p)$ from $\msd\propto t^{\alpha}$; we identify the gel point operationally as the value of $p$ at which $\alpha=0.5$, equivalently $\delta=45^{\circ}$ for a power-law MSD through the GSER~\cite{Winter1987,Chambon1987,Muthukumar1989}. Walkers move to a uniformly chosen nearest neighbour if it is unoccupied and otherwise dwell for a short binding time; the ensemble MSD is accumulated online and $\alpha$ is fitted over the intermediate decade $[L_W/100,L_W/10]$ (see Supplemental Material~\cite{SM} for all methods).
+
+Network growth is controlled by a nucleation-density parameter $\kap\in[0,1]$. At each increment in $p$, a fraction $(1-\kap)$ of the newly occupied sites are placed as independent random nuclei and the remainder are grown by nearest-neighbour adjacency from the existing cluster frontier. Thus $\kap=0$ is classical Bernoulli site percolation (every site an independent seed: maximal nucleation density), $\kap=1$ is single-seed compact (Eden~\cite{Eden1961}) growth, and intermediate $\kap$ interpolates between a spatially uniform obstacle field and a compact, clustered network. The seed fraction $1-\kap$ is the nucleation density---independent nuclei per newly occupied site---so $\kap$ indexes that density inversely. We treat $\kap$ as a coarse-grained proxy for nucleation conditions that are varied experimentally through cross-linker concentration, thermal-ramp rate, or ionic strength, rather than a parameter set directly in the laboratory.
+
+\emph{The gel point is the void-percolation transition.}---For random growth ($\kap=0$), $\alpha(p)$ falls from Fickian diffusion ($\alpha\approx1$) through the gel criterion and arrests sharply [Fig.~\ref{fig:random}]. The crossing is essentially size independent above $L=200$, extrapolating to
+\begin{equation}
+  \pcp(\infty)\approx0.681 ,
+\end{equation}
+within one percent of the complementary void-percolation threshold $1-\pc=0.6884$ ($\pc=0.3116$). The identification is geometric: the walkers occupy the void sublattice, itself a site-percolation problem at occupation $1-p$, which loses spanning connectivity at $p=1-\pc$. A small residual offset is expected, because $\pcp$ is defined dynamically through $\alpha$ rather than a static spanning condition; at the incipient void cluster the MSD is $\msd\propto t^{0.5}$---the Winter--Chambon criterion. The rheological gel point of a randomly grown network is therefore not an independent parameter but is fixed by the geometry of its void phase; moving it requires changing the network morphology.
+
+\emph{Nucleation density tunes the gel point.}---Increasing $\kap$ (lowering the nucleation density) shifts the $\alpha=0.5$ crossing monotonically to higher $p$ [Fig.~\ref{fig:tuning}]. A compact, connected cluster of a given mass occupies a more localised region than the same number of randomly placed sites, leaving a larger and better-connected void that percolates only at higher occupation. Finite-size scaling gives thermodynamic gel points rising smoothly with $\kap$: $\pcp(\infty)=0.681,\,0.702,\,0.722$ for $\kap=0,\,0.6,\,0.8$, resolved cleanly, rising to $\pcp(\infty)\approx0.79$--$0.80$ at $\kap=0.97$---a broadened crossover point carrying larger uncertainty (see below)---and continuing towards the single-seed Eden limit, where a single compact cluster can fill the lattice before fragmenting the void ($\pcp\to1$, treated as an asymptotic bound rather than a finite critical point). A fine $\kap$-grid at fixed $L$ resolves the full curve $\pcp(\kap)$~\cite{SM}, monotonic with two regimes separated near a $\sim1\%$ seed fraction ($\kap\approx0.99$): a gradual rise where many nuclei keep the morphology quasi-random, and a steep rise towards unity where single-cluster growth dominates. Across the accessible range the gel point spans $\pcp\approx0.68$--$0.91$, approaching unity only asymptotically in the Eden limit.
+
+\emph{One universality class.}---Does moving $\pcp$ with $\kap$ change the \emph{character} of the transition? Finite-size scaling across $L=50$--$750$ answers no. The gel point converges by $L\approx200$, so the shift $\pcp(L)=\pcp(\infty)+aL^{-1/\nu}$ fixes $\pcp(\infty)$ robustly but leaves $\nu$ underdetermined; the exponent is instead obtained from two estimators with genuine leverage---the scaling of the transition width $w(L)\sim L^{-1/\nu}$ and the data collapse of $\alpha(p,L)$ [Fig.~\ref{fig:fss}]. Both give $\nueff\approx1.6$, with jackknife intervals that overlap across $\kap\le0.8$ and show no systematic trend in $\kap$:
+\begin{equation}
+  \nueff \approx 1.6 \quad (\text{no systematic } \kap\text{-trend, } \kap\le0.8),
+\end{equation}
+the strongly clustered $\kap\ge0.97$ conditions lie in the Eden crossover, where the transition broadens and the exponent estimators become unreliable, and are excluded from the estimate~\cite{SM}. This effective exponent differs markedly from the static 3D site-percolation value $\nu=0.88$. The difference is expected: $\pcp$ is defined \emph{dynamically}, through the probe-diffusion exponent, rather than through a static order parameter, so the width over which $\alpha$ crosses $0.5$ need not scale with the static correlation length. The substantive result is the \emph{absence of a systematic $\kap$-trend} in $\nueff$: within our resolution, nucleation density moves the gel point without changing its effective critical character. The gel point is thus a programmable but non-universal threshold, not a family of distinct critical behaviours.
+
+\emph{Structure confirms dynamics.}---The identification is not merely dynamical. Computing the void-percolation threshold directly---the loss of a spanning empty cluster on the same lattices---reproduces the microrheological gel point wherever the network is percolation-like: the geometric and dynamical thresholds coincide to within our resolution for $\kap\lesssim0.8$ [Fig.~\ref{fig:geom}]. They separate only for $\kap\gtrsim0.85$, the dynamical point lagging the structural one as the void fragments into large finite pockets, marking the same Eden crossover seen in $\nueff$. That a transport exponent and a connectivity threshold agree where the medium is critical, and part only as it compactifies, is direct evidence that $\pcp$ is the void-percolation transition, dialled by $\kap$.
+
+Finally, the results map directly onto measurable rheology. Because the MSD is a power law over the anomalous window, the GSER yields $G',G''\propto\omega^{\alpha}$ with a frequency-independent phase angle $\delta=90\alpha$; at $\pcp$ this gives $G'\approx G''$ and $\delta\approx45^{\circ}$, the Winter--Chambon signature, across the conditions examined~\cite{SM}. A microrheology experiment on a network whose nucleation density is varied during formation should therefore observe the gel point shift in the direction, and qualitatively by the amount, that $\pcp(\kap)$ predicts.
+
+These results recast the gel point as a candidate structural design parameter. Rather than a fixed consequence of composition, it is set by the growth dynamics of the network-forming phase and can be dialled across $0.68\lesssim\pcp\lesssim0.91$ (with unity as an asymptotic bound) by controlling nucleation density---while, because the effective critical character shows no systematic $\kap$-dependence, the qualitative rheology at the gel point is preserved. The void-percolation baseline $\pcp\simeq 1-\pc$ supplies the reference; nucleation density supplies the tuning; and finite-size scaling indicates that the tuning is consistent with a single effective critical character. Whether $\nueff\approx1.6$ admits an exact value, and how it relates to the spectral and fractal dimensions of the incipient void cluster, are natural next questions.
+
+\begin{acknowledgments}
+[Acknowledgments to be completed.]
+\end{acknowledgments}
+
+% ---------------- main-text figures ----------------
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{fig1_random_alpha_vs_p.png}
+  \caption{\textbf{The gel point is the void-percolation transition.}
+    Anomalous-diffusion exponent $\alpha(p)$ for random ($\kap=0$) growth:
+    Fickian diffusion ($\alpha\approx1$) gives way, through the Winter--Chambon
+    criterion $\alpha=0.5$ (dashed), to arrest. Finite-size scaling places the
+    gel point at $\pcp(\infty)\approx0.681$, within one percent of the
+    void-percolation threshold $1-\pc=0.6884$ ($\pc=0.3116$).}
+  \label{fig:random}
+\end{figure}
+
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=0.48\textwidth]{fig2a_kappa_alpha_vs_p.png}\hfill
+  \includegraphics[width=0.48\textwidth]{fig2b_gelpoint_vs_kappa.png}
+  \caption{\textbf{Nucleation density tunes the gel point.}
+    (a) $\alpha(p,\kap)$: the $\alpha=0.5$ crossing shifts monotonically to
+    higher $p$ as $\kap$ increases from $0$ (random) towards $1$ (single-seed
+    Eden). (b) Gel-point curve $\pcp(\kap)$, spanning $\pcp\approx0.68$--$0.91$ over the accessible range,
+    with two regimes separated near a $\sim1\%$ seed fraction.}
+  \label{fig:tuning}
+\end{figure*}
+
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=0.48\textwidth]{fig4a_fss_pcL.png}\hfill
+  \includegraphics[width=0.48\textwidth]{fig4b_nu_vs_kappa.png}
+  \caption{\textbf{A single tunable universality class.}
+    (a) Finite-size scaling $\pcp(L)=\pcp(\infty)+aL^{-1/\nu}$ for each $\kap$
+    (filled: $L\ge200$ used in fits; open: smaller sizes excluded).
+    (b) Effective exponent $\nueff(\kap)$ from data collapse and transition-width
+    scaling: both agree at $\nueff\approx1.6$, independent of $\kap$ and distinct
+    from static 3D percolation ($\nu=0.88$, dashed). The $\kap=0.97$ point (open)
+    lies near the Eden crossover and is excluded from the exponent estimate.}
+  \label{fig:fss}
+\end{figure*}
+
+% ===================== MAIN REFERENCES =====================
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=\linewidth]{fig_dyn_vs_geom.png}
+  \caption{\textbf{The microrheological gel point is the void-percolation threshold.}
+    (a) Dynamical gel point $\pcp^{\mathrm{MR}}$ (the $\alpha=0.5$ crossing) and the geometric
+    void-spanning threshold $\pcp^{\mathrm{geom}}$ (loss of a face-to-face spanning empty cluster),
+    both at $L=500$. (b) Their difference $\Delta\pcp=\pcp^{\mathrm{MR}}-\pcp^{\mathrm{geom}}$: the
+    two coincide to within the $p$-grid resolution for $\kap\lesssim0.8$ and decouple through the
+    Eden crossover, the dynamical point lagging the structural one. At $\kap=1$ the void of a single
+    compact cluster spans until $p\to1$ (no finite-$p$ threshold).}
+  \label{fig:geom}
+\end{figure*}
+
+\bibliographystyle{apsrev4-2}
+\bibliography{references_enhanced}
+
+% ===================== SUPPLEMENTAL MATERIAL =====================
+\clearpage
+\onecolumngrid
+
+% S-prefixed numbering; reset counters for the SM
+\setcounter{section}{0}
+\setcounter{figure}{0}
+\setcounter{table}{0}
+\setcounter{equation}{0}
+\renewcommand{\thesection}{S\Roman{section}}
+\renewcommand{\thefigure}{S\arabic{figure}}
+\renewcommand{\thetable}{S\arabic{table}}
+\renewcommand{\theequation}{S\arabic{equation}}
+
+\begin{center}
+  \rule{0.9\linewidth}{0.4pt}\\[6pt]
+  {\large\textbf{Supplemental Material}}\\[4pt]
+  {\large\textit{Nucleation density programmes the viscoelastic gel point of a percolation network}}\\[4pt]
+  A.~Author, B.~Author, C.~Author, D.~Author\\[2pt]
+  {\small [Affiliation], [Institution], [City], [Country]}\\[6pt]
+  \rule{0.9\linewidth}{0.4pt}
+\end{center}
+\medskip
+
+\noindent This Supplemental Material gives the lattice and random-walk model, the nucleation-density
+growth algorithm, the finite-size-scaling protocol and its full results, the fixed-$L$ gel-point
+curve, the frequency-domain (GSER) analysis, robustness checks on the growth rule, and
+computational details. Equation, figure, table, and section numbers are prefixed ``S''.
+
+\section{Lattice model and the nucleation-density ($\kap$) growth algorithm}
+We use a simple cubic lattice of side $L$ with periodic boundary conditions. Each site is
+\emph{occupied} (network phase) or \emph{unoccupied} (void/fluid phase); the occupation
+probability $p$ sets the target occupied count $N_{\mathrm{target}}=\lfloor pL^3\rceil$. Lattices
+are built cumulatively over the $p$-sweep, so the occupied set at higher $p$ contains that at
+lower $p$ as a subset---consistent with progressive gelation and ensuring continuity of $\alpha(p)$.
+
+Growth is governed by a nucleation-density parameter $\kap\in[0,1]$. At each increment, of the
+$N_{\mathrm{new}}$ sites to be added,
+\begin{equation}
+  N_{\mathrm{seeds}}=\big\lfloor(1-\kap)\,N_{\mathrm{new}}\big\rceil
+\end{equation}
+are placed at uniformly random unoccupied positions (independent nuclei), and the remaining
+$N_{\mathrm{new}}-N_{\mathrm{seeds}}$ are grown by 6-neighbour (face-sharing) adjacency from the
+combined frontier of all occupied sites. Connectivity is guaranteed by construction: every
+occupied site is reachable from a seed through adjacency steps. The limits are transparent:
+$\kap=0$ places every new site as an independent random seed (Bernoulli site percolation);
+$\kap=1$ plants a single seed and grows a compact connected cluster (Eden growth~\cite{Eden1961}).
+Intermediate $\kap$ interpolates between a spatially uniform obstacle field and a clustered,
+compact network. The seed fraction $1-\kap$ is the nucleation density---the number of
+independent nuclei per newly occupied site---so $\kap$ indexes that density
+inversely.
+
+\section{Random-walk engine and observables}
+Random walkers are initialised on unoccupied sites, modelling microrheology probe particles in the
+fluid phase. Each step attempts a move to one of the six nearest neighbours chosen uniformly; if the
+target is unoccupied the move is accepted, otherwise the walker dwells at its current site for a
+binding time $\mathrm{WT}=\lceil|\mathcal{N}(\mu_{\mathrm{WT}},\sigma_{\mathrm{WT}})|\rceil$ steps,
+with $\mu_{\mathrm{WT}}=20$, $\sigma_{\mathrm{WT}}=5$. This models transient probe--network binding
+and suppresses artificial super-diffusion from immediate reflection. Periodic boundaries are
+applied through $x_n=\mathrm{mod}(x_n-1,L)+1$; the unwrapped coordinate is used for the MSD,
+\begin{equation}
+  \msd=\frac{1}{N_W}\sum_{i=1}^{N_W}\big[\Delta x_i(t)^2+\Delta y_i(t)^2+\Delta z_i(t)^2\big],
+\end{equation}
+accumulated online by parallel reduction to avoid storing $O(L_W N_W)$ trajectories
+($\sim$36~GB at production scale). Production runs use $N_W=3000$ walkers and $N_s=3$ replicates
+per condition. The anomalous exponent $\alpha$ is the log--log slope of $\msd$ over the intermediate
+window $[L_W/100,\,L_W/10]$, and the gel point is located by linear interpolation of $\alpha(p)$
+through $0.5$,
+\begin{equation}
+  \pcp=p_i+\frac{0.5-\alpha(p_i)}{\alpha(p_{i+1})-\alpha(p_i)}(p_{i+1}-p_i),
+  \qquad \alpha(p_i)>0.5>\alpha(p_{i+1}).
+\end{equation}
+
+\section{Winter--Chambon criterion and the GSER}
+At the gel point $\tan\delta=G''/G'=1$, i.e.\ $\delta=45^{\circ}$~\cite{Winter1987,Chambon1987}.
+For a power-law MSD $\msd\propto t^{\alpha}$ the GSER~\cite{Mason1995,Mason2000}
+\begin{equation}
+  G^*(\omega)\approx\frac{k_BT}{\pi a\,\langle r^2(1/\omega)\rangle\,\Gamma(1+\alpha(\omega))}
+\end{equation}
+gives moduli $G',G''\propto\omega^{\alpha}$ and a frequency-independent phase angle
+\begin{equation}
+  \delta=\tfrac{\pi}{2}\alpha \quad\Longleftrightarrow\quad \delta(^{\circ})=90\,\alpha,
+\end{equation}
+so $\delta=45^{\circ}$ is exactly $\alpha=0.5$. Dimensional spectra use $T=293$~K,
+$\eta=1.2\times10^{-3}$~Pa\,s, and probe radius $a=0.243~\mu$m.
+
+\section{Finite-size-scaling protocol and results}
+We repeat the analysis at $L\in\{50,100,200,300,500,750\}$ for $\kap\in\{0,0.6,0.8,0.97,1.0\}$,
+supplemented by two crossover densities $\kap\in\{0.99,0.995\}$ run to $L\le500$ (the Eden-region
+lattice rebuild at $L=750$ is prohibitively slow). Because the finite-size crossover time grows as
+$L^2$, the steps per walker are scaled as
+$L_W(L)=10^6(L/500)^2$, keeping the fit window within the anomalous regime at every size. From the
+size-dependent gel points $\pcp(L)$ (Table~\ref{tab:pcL}) and logistic transition widths $w(L)$ we
+estimate the correlation-length exponent three ways: (i) the threshold shift
+$\pcp(L)=\pcp(\infty)+aL^{-1/\nu}$; (ii) the width scaling $w(L)\sim L^{-1/\nu}$; and (iii) the data
+collapse of $\alpha(p,L)$ against $(p-\pcp(\infty))L^{1/\nu}$, scored by the residual to a master
+curve in $\alpha$-space (bounded, so axis rescaling cannot spuriously improve the score). The two
+smallest sizes ($L=50,100$) carry the strongest corrections to scaling and are excluded from all
+exponent fits; uncertainties are by jackknife over the fitted sizes.
+
+Because $\pcp(L)$ is already stationary for $L\ge200$ (Table~\ref{tab:pcL}), the shift fit
+determines $\pcp(\infty)$ robustly but has little leverage on $\nu$; the exponent is therefore taken
+from the width and collapse estimators, which do have leverage. These agree on
+\begin{equation}
+  \nueff\approx1.6, \qquad \text{independent of } \kap \text{ for } \kap\le0.8,
+\end{equation}
+as summarised in Table~\ref{tab:nu}. The value differs from the static 3D site-percolation exponent
+$\nu=0.88$ because $\pcp$ is defined dynamically (through the probe-diffusion exponent) rather than
+through a static order parameter. Beyond $\kap\approx0.9$ the transition enters a crossover to the Eden singular limit: the gel
+point keeps rising smoothly---$\pcp(\infty)=0.80,\,0.857,\,0.866$ for $\kap=0.97,\,0.99,\,0.995$
+(Table~\ref{tab:pcLcross}), tracking monotonically towards the single-seed bound $\pcp\to1$---but
+the exponent is no longer resolved. With the crossover conditions capped at $L\le500$ (three fit
+sizes), the width and shift estimators become degenerate (e.g.\ $\nu_{\mathrm{width}}=68\pm44$ at
+$\kap=0.99$) and the collapse estimator, though finite, drifts to $\nu\approx2.5$. We therefore
+report $\nueff\approx1.6$ only for the resolved regime $\kap\le0.8$ and treat $\kap\ge0.97$ as an
+unresolved crossover, not a second exponent. The Eden limit $\kap=1$ has $\pcp\to1$ and no
+finite-$L$ crossing within the accessible window, and is treated as a bound.
+
+\begin{table}[h]
+\centering
+\caption{Size-dependent gel point $\pcp(L)$ and its extrapolation $\pcp(\infty)$
+(shift fit, $L\ge200$).}
+\label{tab:pcL}
+\begin{tabular}{lcccc}
+\toprule
+$L$ & $\kap=0$ & $\kap=0.6$ & $\kap=0.8$ & $\kap=0.97$ \\
+\midrule
+50   & 0.734 & 0.754 & 0.773 & 0.881 \\
+100  & 0.693 & 0.720 & 0.740 & 0.840 \\
+200  & 0.684 & 0.706 & 0.725 & 0.815 \\
+300  & 0.683 & 0.705 & 0.724 & 0.812 \\
+500  & 0.681 & 0.702 & 0.721 & 0.805 \\
+750  & 0.682 & 0.703 & 0.724 & 0.804 \\
+\midrule
+$\infty$ & \textbf{0.681} & \textbf{0.702} & \textbf{0.722} & \textbf{$\approx$0.80} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{Crossover set: size-dependent gel point $\pcp(L)$ for the strongly clustered densities
+$\kap=0.99,0.995$, capped at $L\le500$. The gel point rises monotonically towards the Eden bound,
+but with only three fit sizes the exponent is not resolved (Table~\ref{tab:nu}).}
+\label{tab:pcLcross}
+\begin{tabular}{lcc}
+\toprule
+$L$ & $\kap=0.99$ & $\kap=0.995$ \\
+\midrule
+50   & 0.925 & 0.954 \\
+100  & 0.900 & 0.936 \\
+200  & 0.874 & 0.911 \\
+300  & 0.863 & 0.899 \\
+500  & 0.859 & 0.888 \\
+750  & --- & --- \\
+\midrule
+$\infty$ & \textbf{0.857} & \textbf{0.866} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{Effective correlation-length exponent from data collapse and transition-width scaling
+($L\ge200$; jackknife uncertainties). The shift fit does not constrain $\nu$ (see text).
+The $\kap\ge0.97$ rows are unresolved crossover points (capped at $L\le500$ for $\kap\ge0.99$),
+excluded from the reported $\nueff$; ``deg.'' marks a degenerate few-size fit.}
+\label{tab:nu}
+\begin{tabular}{lcc}
+\toprule
+$\kap$ & $\nu$ (collapse) & $\nu$ (width) \\
+\midrule
+0.0  & 1.62 & $1.77\pm0.21$ \\
+0.6  & 1.64 & $1.49\pm0.05$ \\
+0.8  & 1.67 & $1.69\pm0.03$ \\
+0.97  & 2.50 & $2.94\pm0.47$ \;(crossover) \\
+0.99  & 2.49 & deg. \;(crossover, $L\le500$) \\
+0.995 & 2.48 & deg. \;(crossover, $L\le500$) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Origin of the gel criterion and geometric cross-check}
+At the void-percolation threshold the probe explores a critical, fractal void, so its diffusion is
+anomalous with $\msd\propto t^{2/d_w}$, where $d_w$ is the walk dimension of the incipient
+cluster~\cite{Gefen1983,Havlin1983,Straley1980}. For three-dimensional lattice percolation
+$d_w=3.88(3)$~\cite{Kammerer2008}, i.e.\ $2/d_w=0.515(4)$, within one percent of the Winter--Chambon
+value $\alpha=0.5$. The coincidence of the gel criterion with the percolation threshold is thus the
+3D walk exponent falling close to $0.5$, and is specific to three dimensions: in two dimensions
+$d_w=2.878(1)$ gives $2/d_w=0.70$, far from $0.5$. This fixes the random ($\kap=0$) anchor, where the
+void at $p=1-\pc$ is itself a critical Bernoulli configuration~\cite{AlexanderOrbach1982}.
+
+For $\kap>0$ the void is the complement of a correlated (partially Eden) occupied phase, and whether
+the same picture persists is an empirical question, which two independent measurements answer. First,
+the effective width exponent is $\kap$-independent for $\kap\le0.8$ ($\nueff\approx1.6$), distinct
+from the static $\nu=0.88$ because $\pcp$ is defined through the probe-diffusion exponent rather than
+a static order parameter. Second, the dynamical gel point $\pcp^{\mathrm{MR}}$ coincides with the
+purely geometric void-spanning threshold $\pcp^{\mathrm{geom}}$ for $\kap\le0.8$ and decouples only in
+the Eden crossover (Fig.~\ref{fig:geom}). Together these place the low-$\kap$ regime in the ordinary 3D
+percolation class and identify $\kap\to1$ as a distinct compact-solidification limit: the void of a
+single compact cluster retains a spanning path---by translational (periodic) invariance, independent
+of the cluster's position---until $p\to1$, so $\pcp(\kap{=}1)=1$ marks the point at which the last
+fluid vanishes rather than an extrapolated bound.
+
+\emph{Geometric threshold.}---On the same lattices (identical $\kap$ growth, seeds and cumulative
+construction), we label the unoccupied sublattice with 6-connectivity (Hoshen--Kopelman) and test
+whether one void cluster touches both faces along an axis. Averaging the spanning probability over
+$N_s=3$ seeds at $L=500$ and locating its $0.5$ crossing gives $\pcp^{\mathrm{geom}}(\kap)$; at
+$\kap=0$ this returns $0.685\approx1-\pc$, validating the estimator, and face-to-face and
+periodic-wrapping definitions agree in the thermodynamic limit. The dynamical threshold lies slightly
+above the geometric one for $\kap\gtrsim0.85$ because, once the void fragments into large finite
+pockets, an ensemble of probes still records $\alpha>0.5$ over the fit window before feeling the
+pocket walls; passive microrheology therefore mildly overestimates structural gelation in the compact
+regime.
+
+\section{Fixed-$L$ gel-point curve $\pcp(\kap)$}
+At $L=500$, an 18-value $\kap$-grid resolves the full gel-point curve (Table~\ref{tab:kappa}; mean
+over $N_s=3$ replicates, $\alpha=0.5$ crossing). The curve is monotonic and consistent with the
+thermodynamic-limit anchors of Table~\ref{tab:pcL}. Two regimes are separated near a $\sim1\%$ seed
+fraction ($\kap\approx0.99$): a gradual rise for $\kap\lesssim0.99$ (many nuclei, quasi-random
+morphology) and a steep rise towards unity for $\kap\gtrsim0.99$ (single-cluster Eden morphology).
+
+\begin{table}[h]
+\centering
+\caption{Gel point $\pcp$ at $L=500$ for all 18 nucleation densities.}
+\label{tab:kappa}
+\begin{tabular}{cc@{\hspace{2em}}cc}
+\toprule
+$\kap$ & $\pcp(L{=}500)$ & $\kap$ & $\pcp(L{=}500)$ \\
+\midrule
+0.00 & 0.683 & 0.94  & 0.773 \\
+0.20 & 0.687 & 0.97  & 0.806 \\
+0.40 & 0.692 & 0.98  & 0.824 \\
+0.60 & 0.703 & 0.99  & 0.852 \\
+0.70 & 0.709 & 0.995 & 0.880 \\
+0.80 & 0.721 & 0.996 & 0.888 \\
+0.85 & 0.733 & 0.997 & 0.902 \\
+0.88 & 0.744 & 0.998 & 0.910 \\
+0.91 & 0.751 & 1.00  & $\to1$ (Eden bound) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Frequency-domain (GSER) spectra}
+MSD curves near $\pcp$ are converted to $G'(\omega)$, $G''(\omega)$, and $\delta(\omega)$ via the
+GSER. Because the MSD is close to a single power law over the anomalous window, the spectra are
+power laws with frequency-independent $\delta=90\alpha$ over the accessible range
+$\omega\approx0.4$--$4~\mathrm{rad\,s^{-1}}$. At the gel point $G'\approx G''$ and
+$\delta\approx45^{\circ}$ for every $\kap$ (Fig.~\ref{fig:gser}); below it $\delta>45^{\circ}$
+($G''>G'$, viscous), above it $\delta<45^{\circ}$ ($G'>G''$, elastic). The current spectra are
+single-replicate per condition; replication would tighten the modulus estimates.
+
+\section{Robustness: alternative growth rules}
+Connectivity-preserving growth from many independently seeded nuclei per step (an
+adjacency-templated rule) also elevates the gel point; for the specific rule studied,
+$\pcp(\infty)\approx0.93$. Six-neighbour and twenty-six-neighbour adjacency give indistinguishable gel
+points, showing the shift is driven by the connectivity constraint itself, not by the precise
+adjacency rule. This shows that morphology control of the gel point is robust across the growth rules
+tested, rather than an artefact of the $\kap$ construction; the distinct $\pcp$
+of this rule simply reflects a different point in growth-morphology space.
+
+\section{Computational implementation and availability}
+Simulations were implemented in MATLAB with \texttt{parfor} parallelisation over walkers. Lattices
+are generated cumulatively as described above; the random-walk engine tracks both wrapped
+coordinates (for neighbour lookup) and unwrapped coordinates (for the MSD), and the ensemble MSD is
+accumulated online by parallel reduction. The finite-size-scaling driver runs each $\kap$ condition
+at all six sizes with $L_W=10^6(L/500)^2$, $N_W=3000$, $N_s=3$, and the analysis extracts $\pcp(L)$,
+$w(L)$, and the three exponent estimates with jackknife uncertainties, fits restricted to $L\ge200$.
+Code and processed data are available from the authors on request [or: at \texttt{[repository link]}].
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.62\linewidth]{fig0_schematic_growth.png}
+  \caption{Schematic of growth morphologies at fixed occupation, from random ($\kap=0$) through
+    clustered intermediate $\kap$ to single-seed (Eden, $\kap=1$) growth, illustrating how compact
+    growth leaves a more connected void and thus a higher gel point.}
+  \label{fig:schematic}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.8\linewidth]{fig3_gser_spectra.png}
+  \caption{\textbf{One signature, shifted point.}
+    (a) GSER-derived $G'(\omega)$, $G''(\omega)$ for the random ($\kap=0$) network at occupation
+    densities straddling $\pcp$: viscous ($G''>G'$) below, elastic ($G'>G''$) above, and
+    $G'\approx G''$ ($\delta\approx45^{\circ}$) at the gel point---the Winter--Chambon signature.
+    (b) Phase angle $\delta=90\alpha$ versus distance from the gel point $\Delta p=p-\pcp(\kap)$
+    for several $\kap$; all collapse through $\delta=45^{\circ}$ at $\Delta p=0$---the same critical
+    rheology at each $\kap$'s own (shifted) gel point.}
+  \label{fig:gser}
+\end{figure}
+
+\end{document}

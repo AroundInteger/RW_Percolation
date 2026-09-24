@@ -1,0 +1,83 @@
+\section{Model and Methods}
+\label{sec:methods}
+
+\subsection{Lattice model}
+
+We consider a three-dimensional simple cubic lattice of side length $L = 500$ with periodic boundary conditions. Each site is classified as \emph{occupied} (network phase) or \emph{unoccupied} (void/fluid phase). The occupation probability $p$ sets the target number of occupied sites $N_\mathrm{target} = \lfloor p L^3 \rceil$. Lattices are generated cumulatively: at each successive value of $p$ in the sweep, $N_\mathrm{new} = N_\mathrm{target}(p) - N_\mathrm{target}(p_\mathrm{prev})$ sites are added to the existing lattice, so that higher-$p$ lattices contain all sites present at lower $p$ as a strict subset. This is physically consistent with progressive gelation and ensures continuity across the $p$-sweep.
+
+\subsubsection{Random (Bernoulli) percolation}
+
+In the \emph{random percolation} and \emph{density-increment} variants, the $N_\mathrm{new}$ additional sites are selected uniformly at random from the remaining unoccupied volume, with no adjacency constraint. This recovers classical Bernoulli site percolation in the cumulative sense, and both variants give indistinguishable $\alpha(p)$ curves (Sec.~\ref{sec:results_base}).
+
+\subsubsection{Adjacency-templated growth}
+
+In the \emph{templated} variants, new sites must be placed adjacent to at least one already-occupied site, enforcing connectivity of the growing cluster. Two adjacency rules are studied: 6-neighbour (6N, face-sharing only) and 26-neighbour (26N, face- and corner-sharing). Growth proceeds by iteratively selecting sites from the frontier of the current cluster. As shown in Sec.~\ref{sec:results_templated}, both 6N and 26N rules give indistinguishable gel-points, indicating that the precise adjacency rule is secondary to the connectivity constraint itself.
+
+\subsubsection{$\kappa$-mixing nucleation-density model}
+
+To interpolate continuously between random and templated growth, we introduce the nucleation-density parameter $\kappa \in [0, 1]$. At each $p$-step, the $N_\mathrm{new}$ required sites are allocated as follows:
+\begin{equation}
+  N_\mathrm{seeds} = \left\lfloor (1-\kappa)\, N_\mathrm{new} \right\rceil
+  \label{eq:nseeds}
+\end{equation}
+seed sites are placed at uniformly random positions in the unoccupied volume; the remaining $N_\mathrm{new} - N_\mathrm{seeds}$ sites are filled by 6N adjacency growth from the combined frontier of all occupied sites (existing cluster plus new seeds). Connectivity is guaranteed by construction: every occupied site can be reached from at least one seed via a path of adjacency steps. If $\kappa = 0$, all sites are seeded randomly, recovering Bernoulli percolation. If $\kappa = 1$, a single seed is planted at $p = 0$ and all subsequent growth is adjacency-driven, producing a compact, connected cluster morphology reminiscent of Eden growth \citep{Eden1961}. We study 18 values of $\kappa$ spaced densely near $\kappa = 1$ (where the gel-point shifts most steeply): $\kappa \in \{0.00,\, 0.20,\, 0.40,\, 0.60,\, 0.70,\, 0.80,\, 0.85,\, 0.88,\, 0.91,\, 0.94,\, 0.97,\, 0.98,\, 0.99,\, 0.995,\, 0.996,\, 0.997,\, 0.998,\, 1.00\}$.
+
+\subsection{Random walk simulation}
+
+Random walkers are placed on \emph{unoccupied} sites of the lattice, modelling the diffusion of microrheology probe particles through the fluid phase of the gelling medium. For each $(\kappa, p)$ condition, $N_W = 3000$ independent walkers are simulated for $L_W = 10^6$ steps ($N_W = 500$, $L_W = 2\times 10^5$ for the Clusters1 base-case study). At each step, a walker at position $(x, y, z)$ attempts a move to one of the six nearest neighbours chosen uniformly at random. If the target site is unoccupied the move is accepted; if it is occupied the walker waits at its current position for a dwell time
+\begin{equation}
+  \mathrm{WT} = \left\lceil \left|\mathcal{N}(\mu_\mathrm{WT},\, \sigma_\mathrm{WT})\right| \right\rceil \text{ steps},
+  \label{eq:wt}
+\end{equation}
+with $\mu_\mathrm{WT} = 20$, $\sigma_\mathrm{WT} = 5$. This wait-time mechanism models transient binding of the probe to the network and prevents artificial super-diffusion from immediate reflection. Periodic boundary conditions are applied via $x_n = \mathrm{mod}(x_n - 1,\, L) + 1$; the \emph{unwrapped} (accumulated) coordinate $X(t)$ is recorded for MSD computation.
+
+The ensemble-averaged MSD is
+\begin{equation}
+  \langle r^2(t) \rangle = \frac{1}{N_W} \sum_{i=1}^{N_W}
+    \left[\Delta x_i(t)^2 + \Delta y_i(t)^2 + \Delta z_i(t)^2\right],
+  \label{eq:msd}
+\end{equation}
+accumulated online via a parallel-reduction loop to avoid storing $O(L_W N_W)$ trajectory arrays ($\sim$36\,GB at production scale).
+
+\subsection{Gel-point extraction}
+
+The anomalous diffusion exponent $\alpha$ is extracted from a power-law fit to $\langle r^2(t)\rangle$ in log--log space over the intermediate time window $[L_W/100,\, L_W/10]$ (steps $10^4$--$10^5$ for $L_W = 10^6$), avoiding early-time transients and long-time saturation. A linear regression of $\log_{10} t$ on $\log_{10}\langle r^2 \rangle$ gives $\alpha$ as the slope. The gel-point $\pcprime(\kappa)$ is identified as the value of $p$ at which $\alpha = 0.5$ (corresponding to a phase angle $\delta = 45°$ in the Winter--Chambon framework), located by linear interpolation between the bracketing $p$ values:
+\begin{equation}
+  \pcprime = p_i + \frac{0.5 - \alpha(p_i)}{\alpha(p_{i+1}) - \alpha(p_i)}\,(p_{i+1} - p_i),
+  \label{eq:interpolation}
+\end{equation}
+where $\alpha(p_i) > 0.5 > \alpha(p_{i+1})$. For the $\kappa$-mixing study, $N_s = 3$ independent replicates per $(\kappa, p)$ condition are averaged before interpolation.
+
+\subsection{Frequency-domain viscoelastic spectra}
+
+MSD data at the gel-point are converted to complex shear moduli $G^*(\omega) = G'(\omega) + \mathrm{i}G''(\omega)$ via the GSER \citep{Mason1995}:
+\begin{equation}
+  G^*(\omega) \approx \frac{k_B T}{\pi a \langle r^2(1/\omega) \rangle \,\Gamma(1+\alpha(\omega))},
+  \label{eq:gser}
+\end{equation}
+where $a$ is the probe radius, $k_B T$ the thermal energy, and $\alpha(\omega)$ the local logarithmic slope of the MSD evaluated at lag time $1/\omega$. Physical parameters used: $T = 293\,\mathrm{K}$, $\eta = 1.2\times 10^{-3}\,\mathrm{Pa\,s}$, $a = 0.243\,\mu\mathrm{m}$.
+
+\subsection{Simulation parameters}
+
+Key parameters are summarised in Table~\ref{tab:params}. All simulations were performed in MATLAB R2025a with \texttt{parfor} parallelisation over $N_W$.
+
+\begin{table}[h]
+\centering
+\caption{Simulation parameters.}
+\label{tab:params}
+\begin{tabular}{llll}
+\toprule
+Parameter & Symbol & Base-case (Clusters1) & $\kappa$-mixing study \\
+\midrule
+Lattice side length & $L$ & 500 & 500 \\
+Steps per walker & $L_W$ & $10^6$ & $10^6$ \\
+Walkers per condition & $N_W$ & 3000 & 3000 \\
+Independent replicates & $N_s$ & 1 & 3 \\
+Wait-time mean / std & $\mu_\mathrm{WT}$, $\sigma_\mathrm{WT}$ & 20, 5 steps & 20, 5 steps \\
+$p$-value grid & — & 54 values, $p \in [0, 0.99]$ & 38 values, $p \in [0, 0.995]$ \\
+$\kappa$ values & — & — & 18 values, $\kappa \in [0, 1]$ \\
+Total $(p,\kappa,s)$ conditions & — & 216 & 1890 \\
+\bottomrule
+\end{tabular}
+\end{table}
+

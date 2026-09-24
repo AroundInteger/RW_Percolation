@@ -1,0 +1,11 @@
+MATLAB .mat file would contain:
+- t: time steps (1:1000)
+- msd: mean squared displacement data
+- x, y, z: full trajectory data (1000 x 10 arrays)
+- bw: binary lattice (100 x 100 x 100)
+- p_idx: 4
+- p: [0, 0.3116, 0.6884, 0.75]
+- L: 100
+- LW: 1000
+- NW: 10
+- runtime: ~2.5 seconds

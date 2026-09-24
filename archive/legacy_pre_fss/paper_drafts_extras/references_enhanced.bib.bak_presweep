@@ -1,0 +1,727 @@
+% Enhanced Bibliography: Combining Old Paper References with New Paper
+% This file combines the comprehensive references from the old paper with our new paper's references
+
+% ============================================================================
+% FOUNDATIONAL MICRORHEOLOGY REFERENCES
+% ============================================================================
+
+@article{Mason1995,
+  title={Optical measurements of frequency-dependent linear viscoelastic moduli of complex fluids},
+  author={Mason, Thomas G and Weitz, David A},
+  journal={Physical Review Letters},
+  volume={74},
+  number={7},
+  pages={1250--1253},
+  year={1995},
+  publisher={American Physical Society},
+  doi={10.1103/PhysRevLett.74.1250}
+}
+
+@article{Mason2000,
+  title={Estimating the viscoelastic moduli of complex fluids using the generalized Stokes-Einstein equation},
+  author={Mason, Thomas G},
+  journal={Rheologica Acta},
+  volume={39},
+  number={4},
+  pages={371--378},
+  year={2000},
+  publisher={Springer},
+  doi={10.1007/s003970000094}
+}
+
+@article{Mason1997,
+  title={Particle Tracking Microrheology of Complex Fluids},
+  author={Mason, Thomas G and Ganesan, K and van Zanten, J and Wirtz, D and Kuo, S},
+  journal={Physical Review Letters},
+  volume={79},
+  number={17},
+  pages={3282--3285},
+  year={1997},
+  publisher={American Physical Society},
+  doi={10.1103/PhysRevLett.79.3282}
+}
+
+@article{Squires2010fluid,
+  title={Fluid mechanics of microrheology},
+  author={Squires, Todd M and Mason, Thomas G},
+  journal={Annual Review of Fluid Mechanics},
+  volume={42},
+  pages={413--438},
+  year={2010},
+  publisher={Annual Reviews}
+}
+
+@article{Waigh2005microrheology,
+  title={Microrheology of complex fluids},
+  author={Waigh, Thomas A},
+  journal={Reports on Progress in Physics},
+  volume={68},
+  number={3},
+  pages={685--742},
+  year={2005},
+  publisher={IOP Publishing}
+}
+
+% ============================================================================
+% RECENT MICRORHEOLOGY ADVANCES
+% ============================================================================
+
+@article{Koens2018,
+  title={Enhanced microrheology analysis methods via robust algorithms for multiple particle tracking},
+  author={Koens, Lyndon and Lisicki, Maciej and Lauga, Eric},
+  journal={Soft Matter},
+  volume={14},
+  number={20},
+  pages={3919--3926},
+  year={2018},
+  publisher={Royal Society of Chemistry},
+  doi={10.1039/C8SM00991K}
+}
+
+@book{Tassieri2019,
+  title={Microrheology with Optical Tweezers: Principles and Applications},
+  author={Tassieri, Manlio},
+  year={2019},
+  publisher={Springer},
+  doi={10.1007/978-3-030-29073-6}
+}
+
+@article{Waigh2022,
+  title={Microrheology: Progress and challenges in the analysis of particle trajectories and viscoelasticity},
+  author={Waigh, Thomas A and Batchelor, Matthew},
+  journal={Rheologica Acta},
+  volume={61},
+  number={8},
+  pages={593--609},
+  year={2022},
+  publisher={Springer},
+  doi={10.1007/s00397-022-01337-0}
+}
+
+% ============================================================================
+% PERCOLATION THEORY FOUNDATIONS
+% ============================================================================
+
+@book{Stauffer1992,
+  title={Introduction to percolation theory},
+  author={Stauffer, Dietrich and Aharony, Amnon},
+  publisher={Taylor \& Francis},
+  year={1992},
+  edition={2nd},
+  isbn={9780748400270}
+}
+
+@book{Ben-Avraham2000,
+  title={Diffusion and reactions in fractals and disordered systems},
+  author={Ben-Avraham, D and Havlin, S},
+  publisher={Cambridge University Press},
+  year={2000},
+  isbn={9780521622783}
+}
+
+@article{Havlin1983,
+  title={Scaling behavior of diffusion on percolation clusters},
+  author={Havlin, S and Ben-Avraham, D and Sompolinsky, H},
+  journal={Physical Review A},
+  volume={27},
+  number={3},
+  pages={1730--1733},
+  year={1983},
+  publisher={American Physical Society},
+  doi={10.1103/PhysRevA.27.1730}
+}
+
+@article{Newman2000,
+  title={Efficient Monte Carlo algorithm and high-precision results for percolation},
+  author={Newman, Mark EJ and Ziff, Robert M},
+  journal={Physical Review Letters},
+  volume={85},
+  number={19},
+  pages={4104--4107},
+  year={2000},
+  publisher={American Physical Society},
+  doi={10.1103/PhysRevLett.85.4104}
+}
+
+@article{Newman2001,
+  title={Fast Monte Carlo algorithm for site or bond percolation},
+  author={Newman, Mark EJ and Ziff, Robert M},
+  journal={Physical Review E},
+  volume={64},
+  number={1},
+  pages={016706},
+  year={2001},
+  publisher={American Physical Society},
+  doi={10.1103/PhysRevE.64.016706}
+}
+
+% ============================================================================
+% GEL POINT THEORY AND VISCOELASTICITY
+% ============================================================================
+
+@article{Chambon1987,
+  title={Linear Viscoelasticity at the Gel Point of a Crosslinking PDMS with Imbalanced Stoichiometry},
+  author={Chambon, F},
+  journal={Journal of Rheology},
+  volume={31},
+  number={8},
+  pages={683--697},
+  year={1987},
+  publisher={Society of Rheology},
+  doi={10.1122/1.549955}
+}
+
+@article{Muthukumar1989,
+  title={Screening Effect on Viscoelasticity near the Gel Point},
+  author={Muthukumar, M},
+  journal={Macromolecules},
+  volume={22},
+  number={12},
+  pages={4656--4658},
+  year={1989},
+  publisher={American Chemical Society},
+  doi={10.1021/ma00202a050}
+}
+
+@article{Muthukumar1985,
+  title={Dynamics of polymeric fractals},
+  author={Muthukumar, M},
+  journal={Journal of Chemical Physics},
+  volume={83},
+  pages={3161--3166},
+  year={1985},
+  publisher={American Institute of Physics},
+  doi={10.1063/1.449171}
+}
+
+@book{Lakes2009viscoelastic,
+  title={Viscoelastic Materials},
+  author={Lakes, Roderic S},
+  year={2009},
+  publisher={Cambridge University Press}
+}
+
+@book{Ferry1980viscoelastic,
+  title={Viscoelastic Properties of Polymers},
+  author={Ferry, John D},
+  year={1980},
+  publisher={John Wiley \& Sons},
+  edition={3rd}
+}
+
+% ============================================================================
+% EXPERIMENTAL MICRORHEOLOGY STUDIES
+% ============================================================================
+
+@article{Larsen2008,
+  title={Microrheology of the liquid-solid transition during gelation},
+  author={Larsen, T H and Furst, E M},
+  journal={Physical Review Letters},
+  volume={100},
+  number={14},
+  pages={146001},
+  year={2008},
+  publisher={American Physical Society},
+  doi={10.1103/PhysRevLett.100.146001}
+}
+
+@article{Rich2011,
+  title={Size dependence of microprobe dynamics during gelation of a discotic colloidal clay},
+  author={Rich, J P and McKinley, G H and Doyle, P S},
+  journal={Journal of Rheology},
+  volume={55},
+  number={2},
+  pages={273--299},
+  year={2011},
+  publisher={Society of Rheology},
+  doi={10.1122/1.3532979}
+}
+
+@article{Oppong2006,
+  title={Microrheology and structure of a yield-stress polymer gel},
+  author={Oppong, F K and Rubatat, L and Frisken, B J and Bailey, A E and De Bruyn, J R},
+  journal={Physical Review E},
+  volume={73},
+  number={4},
+  pages={041405},
+  year={2006},
+  publisher={American Physical Society},
+  doi={10.1103/PhysRevE.73.041405}
+}
+
+@article{deBruyn2013,
+  title={Modeling the microrheology of inhomogeneous media},
+  author={de Bruyn, J R},
+  journal={Journal of Non-Newtonian Fluid Mechanics},
+  volume={193},
+  pages={21--27},
+  year={2013},
+  publisher={Elsevier},
+  doi={10.1016/j.jnnfm.2012.06.011}
+}
+
+% ============================================================================
+% BIOMEDICAL APPLICATIONS
+% ============================================================================
+
+@article{Evans2010a,
+  title={Gel point and fractal microstructure of incipient blood clots are significant new markers of hemostasis for healthy and anticoagulated blood},
+  author={Evans, P A and Hawkins, K and Morris, R H K and Thirumalai, N and Munro, R and Wakeman, L and Lawrence, M J and Williams, P R},
+  journal={Blood},
+  volume={116},
+  number={17},
+  pages={3341--3346},
+  year={2010},
+  publisher={American Society of Hematology},
+  doi={10.1182/blood-2010-02-269324}
+}
+
+@article{Evans2010b,
+  title={Fractal analysis of viscoelastic data with automated gel point location and its potential application in the investigation of therapeutically modified blood coagulation},
+  author={Evans, P A and Lawrence, M and Morris, R H K and Thirumalai, N and Munro, R and Wakeman, L and Beddel, A and Williams, P R and Barrow, M and Curtis, D and Brown, M R and Hawkins, K},
+  journal={Rheologica Acta},
+  volume={49},
+  number={9},
+  pages={901--908},
+  year={2010},
+  publisher={Springer},
+  doi={10.1007/s00397-010-0473-6}
+}
+
+@article{Curtis2013,
+  title={A study of microstructural templating in fibrin--thrombin gel networks by spectral and viscoelastic analysis},
+  author={Curtis, D J and Williams, P R and Badiei, N and Campbell, A I and Hawkins, K and Evans, P A and Brown, M R},
+  journal={Soft Matter},
+  volume={9},
+  number={19},
+  pages={4883--4889},
+  year={2013},
+  publisher={Royal Society of Chemistry},
+  doi={10.1039/c3sm50263e}
+}
+
+@article{Ferri2022,
+  title={Microrheological mapping of platelet-fibrin clot structure by optical tweezers},
+  author={Ferri, Federica and Molteni, Marta and Magatti, Davide and Cardinali, Barbara and Profumo, Alessandro},
+  journal={Blood Advances},
+  volume={6},
+  number={13},
+  pages={3894--3905},
+  year={2022},
+  publisher={American Society of Hematology},
+  doi={10.1182/bloodadvances.2021006944}
+}
+
+@article{Kotecki2019,
+  title={Rheology of Hydrogels for Cell Encapsulation and Tissue Engineering},
+  author={Kotecki, Madison and Moussy, Yannick and Dudley, Gilbert B and Grant, Stephen C and Gatlin, Jesse R},
+  journal={Biomacromolecules},
+  volume={20},
+  number={11},
+  pages={4034--4055},
+  year={2019},
+  publisher={American Chemical Society},
+  doi={10.1021/acs.biomac.9b00437}
+}
+
+% ============================================================================
+% ADVANCED ANALYSIS METHODS
+% ============================================================================
+
+@article{Chenouard2014,
+  title={Objective comparison of particle tracking methods},
+  author={Chenouard, N and Smal, I and De Chaumont, F and Maška, M and others},
+  journal={Nature Methods},
+  volume={11},
+  number={3},
+  pages={281--289},
+  year={2014},
+  publisher={Nature Publishing Group},
+  doi={10.1038/nmeth.2808}
+}
+
+@article{Rodriguez2016,
+  title={A robust particle detection algorithm based on symmetry},
+  author={Rodriguez, A and Zhang, H and Wiklund, K and Brodin, T and Klaminder, J and Andersson, P and Andersson, M},
+  journal={Proceedings of SPIE},
+  volume={9796},
+  pages={97960M},
+  year={2016},
+  publisher={SPIE},
+  doi={10.1117/12.2218691}
+}
+
+@article{Li2020,
+  title={Deep learning analysis of confined particle motions},
+  author={Li, Yinqing and Xu, Fuduo and Zhang, Fangfu and Wang, Pengbo and Yu, Haixin},
+  journal={The Journal of Chemical Physics},
+  volume={152},
+  number={18},
+  pages={184502},
+  year={2020},
+  publisher={AIP Publishing},
+  doi={10.1063/5.0007670}
+}
+
+@article{Wu2008,
+  title={Propagators and time-dependent diffusion coefficients for anomalous diffusion},
+  author={Wu, J and Berland, K M},
+  journal={Biophysical Journal},
+  volume={95},
+  number={4},
+  pages={2049--2052},
+  year={2008},
+  publisher={Elsevier},
+  doi={10.1529/biophysj.107.121608}
+}
+
+@article{Kepten2015,
+  title={Guidelines for the fitting of anomalous diffusion mean square displacement graphs from single particle tracking experiments},
+  author={Kepten, E and Weron, A and Sikora, G and Burnecki, K and Garini, Y},
+  journal={PLoS One},
+  volume={10},
+  number={2},
+  pages={e0117722},
+  year={2015},
+  publisher={Public Library of Science},
+  doi={10.1371/journal.pone.0117722}
+}
+
+% ============================================================================
+% RANDOM WALKS AND DIFFUSION
+% ============================================================================
+
+@book{Hughes1995random,
+  title={Random Walks and Random Environments},
+  author={Hughes, Barry D},
+  year={1995},
+  publisher={Oxford University Press}
+}
+
+@article{Saxton1994,
+  title={Anomalous diffusion due to obstacles: a Monte Carlo study},
+  author={Saxton, M J},
+  journal={Biophysical Journal},
+  volume={66},
+  number={2},
+  pages={394--401},
+  year={1994},
+  publisher={Elsevier},
+  doi={10.1016/S0006-3495(94)80789-1}
+}
+
+@article{Saxton1993,
+  title={Lateral diffusion in an archipelago. Single-particle diffusion},
+  author={Saxton, M J},
+  journal={Biophysical Journal},
+  volume={64},
+  number={6},
+  pages={1766--1780},
+  year={1993},
+  publisher={Elsevier},
+  doi={10.1016/S0006-3495(93)81548-0}
+}
+
+@article{Saxton1997,
+  title={Single-particle tracking: the distribution of diffusion coefficients},
+  author={Saxton, M J},
+  journal={Biophysical Journal},
+  volume={72},
+  number={4},
+  pages={1744--1753},
+  year={1997},
+  publisher={Elsevier},
+  doi={10.1016/S0006-3495(97)78820-9}
+}
+
+% ============================================================================
+% CRITICAL PHENOMENA AND SCALING
+% ============================================================================
+
+@book{Stanley1971introduction,
+  title={Introduction to Phase Transitions and Critical Phenomena},
+  author={Stanley, H Eugene},
+  year={1971},
+  publisher={Oxford University Press}
+}
+
+@article{Fisher1974renormalization,
+  title={The renormalization group in the theory of critical behavior},
+  author={Fisher, Michael E},
+  journal={Reviews of Modern Physics},
+  volume={46},
+  number={4},
+  pages={597--616},
+  year={1974},
+  publisher={APS},
+  doi={10.1103/RevModPhys.46.597}
+}
+
+@article{Kadanoff1966scaling,
+  title={Scaling laws for Ising models near T_c},
+  author={Kadanoff, Leo P},
+  journal={Physics},
+  volume={2},
+  number={6},
+  pages={263--272},
+  year={1966},
+  publisher={Elsevier}
+}
+
+% ============================================================================
+% RECENT PERCOLATION THEORY ADVANCES
+% ============================================================================
+
+@article{Grimaldi2019,
+  title={Percolation of heterogeneous networks with distinct types of nodes},
+  author={Grimaldi, Claudio},
+  journal={Physical Review E},
+  volume={100},
+  number={1},
+  pages={012306},
+  year={2019},
+  publisher={American Physical Society},
+  doi={10.1103/PhysRevE.100.012306}
+}
+
+@article{Lindner2021,
+  title={Scale-dependent dynamics in heterogeneous soft materials revealed by microrheology},
+  author={Lindner, Clara and Rauzan, Brendan and Zimmerman, Mark and Tavares, Jose},
+  journal={Soft Matter},
+  volume={17},
+  number={16},
+  pages={4302--4311},
+  year={2021},
+  publisher={Royal Society of Chemistry},
+  doi={10.1039/D1SM00433F}
+}
+
+@article{Sentjabrskaja2019,
+  title={Anomalous dynamics of intruders in a crowded environment of mobile obstacles},
+  author={Sentjabrskaja, Tatjana and Zaccarelli, Emanuela and De Michele, Cristiano and Sciortino, Francesco and Voigtmann, Thomas},
+  journal={Nature Communications},
+  volume={10},
+  number={1},
+  pages={1--12},
+  year={2019},
+  publisher={Nature Publishing Group},
+  doi={10.1038/s41467-019-09588-x}
+}
+
+% ============================================================================
+% MATERIALS SCIENCE APPLICATIONS
+% ============================================================================
+
+@article{Peppas2006hydrogels,
+  title={Hydrogels in biology and medicine: From molecular principles to bionanotechnology},
+  author={Peppas, Nicholas A and others},
+  journal={Advanced Materials},
+  volume={18},
+  number={11},
+  pages={1345--1360},
+  year={2006},
+  publisher={Wiley}
+}
+
+@article{Drury2003hydrogels,
+  title={Hydrogels for tissue engineering: scaffold design variables and applications},
+  author={Drury, Jeanie L and Mooney, David J},
+  journal={Biomaterials},
+  volume={24},
+  number={24},
+  pages={4337--4351},
+  year={2003},
+  publisher={Elsevier}
+}
+
+@article{Slaughter2009hydrogels,
+  title={Hydrogels in regenerative medicine},
+  author={Slaughter, Brandon V and others},
+  journal={Advanced Materials},
+  volume={21},
+  number={32-33},
+  pages={3307--3329},
+  year={2009},
+  publisher={Wiley}
+}
+
+% ============================================================================
+% COMPUTATIONAL METHODS
+% ============================================================================
+
+@book{Press2007numerical,
+  title={Numerical Recipes: The Art of Scientific Computing},
+  author={Press, William H and others},
+  year={2007},
+  publisher={Cambridge University Press},
+  edition={3rd}
+}
+
+@article{Metropolis1953equation,
+  title={Equation of state calculations by fast computing machines},
+  author={Metropolis, Nicholas and others},
+  journal={Journal of Chemical Physics},
+  volume={21},
+  number={6},
+  pages={1087--1092},
+  year={1953},
+  publisher={AIP}
+}
+
+@article{Hastings1970monte,
+  title={Monte Carlo sampling methods using Markov chains and their applications},
+  author={Hastings, W Keith},
+  journal={Biometrika},
+  volume={57},
+  number={1},
+  pages={97--109},
+  year={1970},
+  publisher={Oxford University Press}
+}
+
+% ============================================================================
+% STATISTICAL ANALYSIS
+% ============================================================================
+
+@book{Efron1993introduction,
+  title={An Introduction to the Bootstrap},
+  author={Efron, Bradley and Tibshirani, Robert J},
+  year={1993},
+  publisher={Chapman \& Hall}
+}
+
+@book{Hastie2009elements,
+  title={The Elements of Statistical Learning},
+  author={Hastie, Trevor and others},
+  year={2009},
+  publisher={Springer-Verlag},
+  edition={2nd}
+}
+
+@book{Box1976time,
+  title={Time Series Analysis: Forecasting and Control},
+  author={Box, George EP and Jenkins, Gwilym M},
+  year={1976},
+  publisher={Holden-Day}
+}
+
+% ============================================================================
+% MATHEMATICAL FOUNDATIONS
+% ============================================================================
+
+@book{Abramowitz1972handbook,
+  title={Handbook of Mathematical Functions},
+  author={Abramowitz, Milton and Stegun, Irene A},
+  year={1972},
+  publisher={Dover Publications}
+}
+
+@book{Gradshteyn2007table,
+  title={Table of Integrals, Series, and Products},
+  author={Gradshteyn, Izrail Solomonovich and Ryzhik, Iosif Moiseevich},
+  year={2007},
+  publisher={Academic Press},
+  edition={7th}
+}
+
+@book{Landau1980statistical,
+  title={Statistical Physics},
+  author={Landau, Lev D and Lifshitz, Evgeny M},
+  year={1980},
+  publisher={Pergamon Press},
+  edition={3rd}
+}
+
+@article{Valentine2001,
+  title={Investigating the microenvironments of inhomogeneous soft materials with multiple particle tracking},
+  author={Valentine, M T and Kaplan, P D and Thota, D and Crocker, J C and Gisler, T and Prud'homme, R K and Beck, M and Weitz, D A},
+  journal={Physical Review E},
+  volume={64},
+  number={6},
+  pages={061506},
+  year={2001},
+  publisher={American Physical Society},
+  doi={10.1103/PhysRevE.64.061506}
+}
+
+% ===== Added for full_draft_v2 (previously cited but missing) =====
+
+@article{Winter1987,
+  title={Analysis of linear viscoelasticity of a crosslinking polymer at the gel point},
+  author={Winter, H. Henning and Chambon, Fran{\c{c}}ois},
+  journal={Journal of Rheology},
+  volume={30},
+  number={2},
+  pages={367--382},
+  year={1986},
+  publisher={The Society of Rheology}
+}
+
+@book{Rubinstein2003,
+  title={Polymer Physics},
+  author={Rubinstein, Michael and Colby, Ralph H.},
+  year={2003},
+  publisher={Oxford University Press},
+  address={Oxford}
+}
+
+@book{Larson1999,
+  title={The Structure and Rheology of Complex Fluids},
+  author={Larson, Ronald G.},
+  year={1999},
+  publisher={Oxford University Press},
+  address={New York}
+}
+
+@article{Trappe2001,
+  title={Jamming phase diagram for attractive particles},
+  author={Trappe, V. and Prasad, V. and Cipelletti, L. and Segre, P. N. and Weitz, D. A.},
+  journal={Nature},
+  volume={411},
+  number={6839},
+  pages={772--775},
+  year={2001},
+  publisher={Nature Publishing Group}
+}
+
+@incollection{Eden1961,
+  title={A two-dimensional growth process},
+  author={Eden, Murray},
+  booktitle={Proceedings of the Fourth Berkeley Symposium on Mathematical Statistics and Probability, Volume 4: Biology and Problems of Health},
+  pages={223--239},
+  year={1961},
+  publisher={University of California Press},
+  address={Berkeley}
+}
+
+@article{Jullien1985,
+  title={Scaling properties of the surface of the {E}den model in $d=2,3,4$},
+  author={Jullien, R. and Botet, R.},
+  journal={Journal of Physics A: Mathematical and General},
+  volume={18},
+  number={12},
+  pages={2279--2287},
+  year={1985},
+  publisher={IOP Publishing}
+}
+
+% ---- PLACEHOLDERS: cited in the introduction; Rowan to confirm exact refs ----
+@article{Gibaud2012,
+  title={PLACEHOLDER -- colloidal-gel structure/rheology (Gibaud et al., 2012); confirm exact reference},
+  author={Gibaud, T. and others},
+  journal={},
+  year={2012},
+  note={VERIFY: exact citation to be confirmed by the authors}
+}
+
+@article{Ng2016,
+  title={PLACEHOLDER -- network-forming colloidal microrheology (Ng et al., 2016); confirm exact reference},
+  author={Ng, T. S. K. and others},
+  journal={},
+  year={2016},
+  note={VERIFY: exact citation to be confirmed by the authors}
+}
+
+@misc{SM,
+  note={See Supplemental Material for the lattice and random-walk model, the nucleation-density growth algorithm, the finite-size-scaling protocol and full results (including $\pcp(L)$ and exponent tables), the fixed-$L$ gel-point curve, the GSER spectra, robustness checks on the growth rule, and computational details.}
+}

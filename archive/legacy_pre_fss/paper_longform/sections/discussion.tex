@@ -1,0 +1,35 @@
+\section{Discussion}
+\label{sec:discussion}
+
+\subsection{Physical basis of $\pcprime \approx 1 - \pc$}
+
+The result $\pcprime \approx 1 - \pc$ is not an approximation or a numerical coincidence — it is a direct consequence of placing walkers in the void phase. The void sublattice of a 3D simple cubic lattice undergoes its own site-percolation transition: it is connected (spanning) when $p < 1 - \pc \approx 0.6884$ and fragmented when $p > 1 - \pc$. At $p = 1 - \pc$ exactly, the void phase is at its critical point — the system sits at the boundary between a connected, system-spanning fluid and a collection of finite isolated pockets. A random walker at this point experiences the critical-point MSD scaling $\langle r^2(t) \rangle \propto t^{0.5}$, which is precisely the Winter--Chambon criterion $\alpha = 0.5$.
+
+The small offset ($\pcprime = 0.683$ vs $1 - \pc = 0.6884$) is attributable to finite-size effects. At $L = 500$, the void percolation transition is sharp but shifted below the thermodynamic threshold; the observed offset of $\sim 0.005$ in $p$ is consistent with finite-size scaling corrections of order $L^{-1/\nu}$ with $\nu \approx 0.88$ for 3D percolation \citep{Ballesteros1999}.
+
+This identification has a concrete implication for microrheology: the rheological gel-point of a random network-forming material is not an independently tunable parameter — it is fixed at $\pcprime = 1 - \pc$ by the geometry of the lattice and the constraint that walkers are in the void. Changing the gel-point therefore requires changing the network morphology.
+
+\subsection{Why clustered growth shifts the gel-point}
+
+When growth is clustered rather than random, the occupied cluster grows as a connected, compact body. At any given density $p$, a compact connected cluster occupies a more localised region of space than the same number of randomly placed sites, leaving a correspondingly larger and more interconnected void region. The void sublattice therefore loses its percolation connectivity only at a higher occupied fraction $p$; reducing the nucleation density (raising $\kappa$) shifts $\pcprime$ continuously upward, reaching $0.886$ for the many-nuclei morphology and $\to 1$ in the single-seed limit.
+
+The persistent sub-diffusion above $\pcprime$ ($\alpha \approx 0.3$--$0.4$ at $p = 0.95$) supports this interpretation: even well above the gel-point, walkers in the clustered system are not fully arrested because the void channels, though disconnected on the largest scales, remain locally open and tortuous. This is qualitatively different from the random case, where the void fragments into small, isolated pockets above $\pcprime$ and walkers become immediately localised.
+
+The near-identity of the 6N and 26N gel-points ($|\Delta\pcprime| = 0.0005$) demonstrates that the connectivity constraint is the key physical ingredient, not the details of how adjacency is defined. This robustness is encouraging for physical realisability: any growth mechanism that enforces cluster connectivity is expected to produce a similar shift.
+
+\subsection{$\kappa$ as a material design parameter}
+
+The nucleation-density parameter $\kappa$ indexes the seed fraction $1-\kappa$: the number of independent nucleation centres per newly occupied site. In real polymer systems, analogous parameters include the concentration of cross-linking agents (which act as nucleation centres for gel formation), the temperature ramp rate (which controls nucleation density in thermoreversible gels), and the ionic strength (which tunes the Debye screening length and hence the range of attractive interactions governing cluster growth). Systems with high nucleation density (many small growing clusters, low $\kappa$) are predicted to gel at lower $p$, while systems that grow from a small number of nuclei (high $\kappa$) are predicted to gel at much higher $p$.
+
+The steep rise in $\pcprime(\kappa)$ near $\kappa \approx 0.99$ (the Eden regime, Fig.~\ref{fig:fig4}b) suggests that small changes in nucleation density at very low seed fractions can produce large shifts in the gel-point. This regime may be experimentally accessible in systems where gelation initiates from a small number of heterogeneous nucleation sites, such as mineral impurities or deliberately introduced seed particles.
+
+\subsection{Relation to Eden and diffusion-limited aggregation models}
+
+At $\kappa = 1$, the growth model is equivalent to Eden growth \citep{Eden1961}: a single seed expands by randomly adding adjacent frontier sites at each step. Eden clusters in 3D are compact, roughly spherical, and have a fractal dimension approaching 3 at long times \citep{Jullien1985}. The predicted $\pcprime \to 1$ as $L \to \infty$ for $\kappa = 1$ is consistent with this: a single compact Eden cluster can in principle fill the lattice entirely before fragmenting the void, so the gel-point in the thermodynamic limit approaches $p = 1$. The finite-size extrapolation gives $\pcprime(\kappa=1) \approx 0.993$ at $L = 500$, confirming that even at this scale the void channels persist to very high density.
+
+\subsection{Limitations and future work}
+
+Several limitations warrant acknowledgement. First, all results are for a single lattice size $L = 500$; a finite-size-scaling analysis over a range of $L$ would be needed to extract genuine critical exponents. The broader transition and persistent sub-diffusion seen for clustered growth are morphological effects of the shifted gel-point and, on the present single-size data, should not be read as evidence for a distinct universality class. Second, the GSER frequency-domain spectra (Sec.~\ref{sec:results_gser}) are based on a single-replica analysis per condition; replication at the same level as the structural data would strengthen the modulus estimates. Third, the $\kappa = 1$ gel-point is extrapolated rather than directly measured, and would benefit from a dedicated simulation at $p \in [0.99, 1.00]$.
+
+Future work will address finite-size scaling to characterise the effective critical exponent along the $\kappa$ family, extend the framework to 2D lattices and off-lattice systems, and explore connections between $\kappa$ and experimentally controllable nucleation parameters in physical gel-forming systems.
+

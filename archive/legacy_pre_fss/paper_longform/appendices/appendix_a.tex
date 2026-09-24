@@ -1,0 +1,155 @@
+\appendix
+\section{Mathematical Framework}
+\label{app:mathematical}
+
+\subsection{Sigmoid Function Derivation and Fitting}
+
+\subsubsection{Sigmoid Function Form}
+The sigmoid function used to model the relationship between percolation probability $\pval$ and growth exponent $\alphagrowth$ is:
+\begin{equation}
+\alphagrowth(\pval) = \alphagrowth_{\min} + \frac{\alphagrowth_{\max} - \alphagrowth_{\min}}{1 + \exp\left(\frac{\pval - \pc}{\text{width}}\right)}
+\end{equation}
+where:
+\begin{itemize}
+    \item $\alphagrowth_{\min}$ is the minimum growth exponent (lower bound)
+    \item $\alphagrowth_{\max}$ is the maximum growth exponent (upper bound)
+    \item $\pc$ is the critical percolation probability (transition point)
+    \item width is the transition width parameter
+\end{itemize}
+
+\subsubsection{Fitting Methodology}
+We use robust non-linear least squares fitting to determine the sigmoid parameters. The fitting process involves:
+
+\begin{enumerate}
+    \item \textbf{Initial parameter estimates}:
+    \begin{align}
+    \alphagrowth_{\min} &= 0.1 \\
+    \alphagrowth_{\max} &= 0.9 \\
+    \pc &= 0.7 \\
+    \text{width} &= 0.05
+    \end{align}
+    
+    \item \textbf{Optimisation}: Using the Levenberg-Marquardt algorithm implemented in MATLAB's \texttt{lsqcurvefit} function
+    
+    \item \textbf{Convergence criteria}: Relative change in parameters $< 10^{-6}$
+\end{enumerate}
+
+\subsubsection{Fitting Results}
+The fitted values below are taken from the analysis outputs. They characterise two morphologies on the $\kappa$ continuum --- the random limit and the many-nuclei (templated) limit --- not distinct universality classes. The uncertainties quoted are the formal fit uncertainties returned by the optimiser, which are large for the poorly constrained many-nuclei fit.
+
+\textbf{Random limit}:
+\begin{align}
+\alphagrowth_{\min} &= 0.0000 \pm 0.0106 \\
+\alphagrowth_{\max} &= 0.9959 \pm 0.0106 \\
+\pc &= 0.6827 \pm 0.0106 \\
+\text{width} &= 0.0152 \pm 0.0106 \\
+R^2 &= 0.9995
+\end{align}
+
+\textbf{Many-nuclei (templated) limit, unpadded}:
+\begin{align}
+\pc &= 0.8000 \pm 0.1392 \\
+\text{width} &= 0.0712 \pm 0.1392 \\
+R^2 &= 0.7639
+\end{align}
+The unpadded fit is poorly constrained (the formal uncertainty on $\pc$ exceeds the random-limit shift itself) because the measured $\alpha(p)$ does not reach zero within the simulated window.
+
+\textbf{Many-nuclei (templated) limit, padded with $\alpha=0$ at $p=1$}:
+\begin{align}
+\alphagrowth_{\min} &= 0.0000 \\
+\alphagrowth_{\max} &= 0.9767 \\
+\pc &= 0.8825 \\
+\text{width} &= 0.0516 \\
+R^2 &= 0.9858
+\end{align}
+Padding the curve with $\alpha=0$ at $p=1$ captures the arrested tail that lies outside the simulated window and raises the fit quality substantially. The resulting $\pc \approx 0.88$ is consistent with the directly interpolated gel-point $\pcprime \approx 0.886$ reported in the main text. The difference between the random-limit and many-nuclei widths is therefore a genuine feature of the data, but the unpadded fit alone does not resolve it.
+
+\subsection{Finite-size scaling of the gel-point}
+
+The gel-points quoted from the sigmoid fits above are single-lattice-size ($L = 500$) values. A subsequent finite-size-scaling campaign repeated the analysis at $L \in \{50, 100, 200, 300, 500, 750\}$ and extrapolated $\pcprime(L) = \pcprime(\infty) + a L^{-1/\nu}$ using sizes $L \ge 200$. The extrapolated gel-points, which supersede the single-size values, are:
+
+\begin{center}
+\begin{tabular}{lcccc}
+\hline
+ & $\kappa = 0$ & $\kappa = 0.6$ & $\kappa = 0.8$ & $\kappa = 0.97$ \\
+\hline
+$\pcprime(\infty)$ & 0.681 & 0.702 & 0.722 & $\approx 0.80$ \\
+\hline
+\end{tabular}
+\end{center}
+
+The $\kappa = 0$ extrapolation ($0.681$) lies slightly below the $L = 500$ value ($0.683$) and closer to the trend; the shift is small but the extrapolated value is the one to quote. Two further, strongly clustered densities run to $L \le 500$ give $\pcprime(\infty) = 0.857$ ($\kappa = 0.99$) and $0.866$ ($\kappa = 0.995$), rising monotonically towards the single-seed bound $\pcprime \to 1$ at $\kappa = 1$, where no finite-$L$ crossing exists.
+
+The same campaign estimates the effective exponent of the dynamical gel-point. The threshold-shift fit has little leverage on $\nu$ once $\pcprime(L)$ has converged, so the exponent is taken from the transition-width scaling and the data collapse, which agree on $\nu_{\mathrm{eff}} \approx 1.6$ with no systematic $\kappa$-trend for $\kappa \le 0.8$ (width-scaling values $1.77 \pm 0.21$, $1.49 \pm 0.05$, $1.69 \pm 0.03$ at $\kappa = 0, 0.6, 0.8$). This is distinct from the static percolation value $\nu = 0.88$ because $\pcprime$ is defined through the probe-diffusion exponent rather than a static order parameter. For $\kappa \ge 0.97$ the exponent is no longer resolved (the estimators drift and the fits become degenerate) and those densities are treated as an unresolved crossover, not a second exponent. The static exponents $\beta$, $\gamma$ and $z$ were not measured. Full tables are given in the supplemental material of the accompanying letter.
+
+\subsection{Gel-Point Prediction Model}
+
+\subsubsection{Mathematical Model}
+The gel-point prediction model relates lattice generation parameters to the critical gel-point:
+\begin{equation}
+\pcprime(\theta,\kappa,\lambda) = 0.6827 + 0.20 \times \frac{\theta-6}{20} + 0.15 \times \kappa + 0.05 \times \lambda
+\end{equation}
+where:
+\begin{itemize}
+    \item $\theta$ is connectivity parameter (6-26)
+    \item $\kappa$ is templating strength (0-1)
+    \item $\lambda$ is growth order (0-1)
+\end{itemize}
+
+This expression is a heuristic fit, not a derived result, and the symbol $\kappa$ here denotes a templating-strength parameter of the fit rather than the nucleation-density parameter of the main text.
+
+\subsubsection{Parameter Interpretation}
+\textbf{Connectivity Parameter $\theta$}:
+\begin{itemize}
+    \item $\theta = 6$: Minimum connectivity (6N adjacency)
+    \item $\theta = 26$: Maximum connectivity (26N adjacency)
+    \item Linear scaling: $\frac{\theta-6}{20}$ provides 0-1 range
+\end{itemize}
+
+\textbf{Templating-strength parameter $\kappa$ (of this fit, not the nucleation density)}:
+\begin{itemize}
+    \item $\kappa = 0$: No clustering (random percolation)
+    \item $\kappa = 1$: Maximum clustering
+    \item Effect: $0.15 \times \kappa$ provides up to 0.15 shift in $\pcprime$
+\end{itemize}
+
+\textbf{Growth Order $\lambda$}:
+\begin{itemize}
+    \item $\lambda = 0$: Random growth
+    \item $\lambda = 1$: Sequential growth
+    \item Effect: $0.05 \times \lambda$ provides up to 0.05 shift in $\pcprime$
+\end{itemize}
+
+\subsection{Frequency Space Conversion Theory}
+
+\subsubsection{Generalised Stokes--Einstein Relation}
+The GSER relates MSD to complex shear modulus:
+\begin{equation}
+\gsr = \frac{k_B T}{\pi a \langle r^2(1/\omegafreq) \rangle \Gamma(1 + \alphagrowth)}
+\end{equation}
+where:
+\begin{itemize}
+    \item $k_B = 1.38 \times 10^{-23}$ J/K (Boltzmann constant)
+    \item $T = 298$ K (temperature)
+    \item $a = 1 \times 10^{-6}$ m (particle radius)
+    \item $\alphagrowth$ is the growth exponent from MSD analysis
+    \item $\Gamma$ is the gamma function
+\end{itemize}
+
+\subsubsection{Dynamic Moduli Calculation}
+The complex shear modulus is decomposed into:
+
+\textbf{Storage Modulus}:
+\begin{equation}
+\gprime = \text{Re}[\gsr] = |\gsr| \cos(\deltaphase)
+\end{equation}
+
+\textbf{Loss Modulus}:
+\begin{equation}
+\gdoubleprime = \text{Im}[\gsr] = |\gsr| \sin(\deltaphase)
+\end{equation}
+
+\textbf{Phase Angle}:
+\begin{equation}
+\deltaphase = \arctan\left(\frac{\gdoubleprime}{\gprime}\right)
+\end{equation}

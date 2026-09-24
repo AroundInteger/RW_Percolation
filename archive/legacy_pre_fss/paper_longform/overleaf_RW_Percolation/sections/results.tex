@@ -1,0 +1,195 @@
+\section{Results}
+\label{sec:results}
+
+Figure~\ref{fig:schematic} provides a two-dimensional schematic of the four growth mechanisms studied, illustrating the qualitative morphological differences and their consequences for void connectivity at identical occupation densities.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{figures/fig_schematic_growth.png}
+  \caption{\textbf{Growth mechanism morphologies and their gel-point hierarchy (2D schematic).}
+    Each row depicts a different growth mechanism at three identical values of the occupation
+    density $p$ (columns). Border colour indicates void-connectivity state: green = sol
+    (spanning connected void $> 50\%$); orange $\approx p_c'$ (transitioning); red = gel
+    (spanning void $< 12\%$, void fragmented into isolated pockets, shown pink).
+    \emph{Row 1: Bernoulli (random percolation).} Sites are placed uniformly at random;
+    the network is already gelled ($p_c' \approx 0.41$) at $p = 0.55$ and $p = 0.70$.
+    \emph{Row 2: 6N adjacency-templated.} Growth proceeds by 4-connected Eden expansion
+    from 18 Poisson-disk distributed seeds; compact blocky blobs grow and merge,
+    with the gel-point near $p = 0.55$ (orange border).
+    \emph{Row 3: 26N adjacency-templated.} As row 2 but with 8-connected growth, producing
+    rounder blobs that merge marginally earlier than 6N.
+    \emph{Row 4: Eden ($\kappa = 1$), single seed.} A single central seed grows as a
+    compact disc; at $p = 0.70$ where rows 1--3 are all gelled, the void still forms a
+    connected frame around the cluster (green border, 54\% spanning), demonstrating the
+    markedly elevated gel-point ($p_c' \approx 0.99$ in 3D) of the single-seed limit.
+    Note: 2D gel-points shown here are illustrative; quantitative gel-points reported in
+    the text are from the full 3D ($L = 500$) simulations.}
+  \label{fig:schematic}
+\end{figure}
+
+\subsection{Gel-point in random percolation: $\pcprime \approx 1 - \pc$}
+\label{sec:results_base}
+
+Figure~\ref{fig:fig1} shows $\alpha(p)$ for the two random-growth variants (random percolation and density increment) over the full range $p \in [0, 1]$ (panel a) and the critical region (panel b). Both variants give indistinguishable curves: $\alpha \approx 1$ (Fickian diffusion, sol state) for $p \lesssim 0.60$, a sharp monotonic decline through the gel criterion $\alpha = 0.5$, and rapid arrest ($\alpha \to 0$) above $\pcprime$.
+
+Linear interpolation of $\alpha(p)$ through 0.5 gives:
+\begin{align}
+  \pcprime(\text{random percolation}) &= 0.6832, \nonumber \\
+  \pcprime(\text{density increment})  &= 0.6834.
+  \label{eq:pc_random}
+\end{align}
+Both values agree to within $\Delta p = 0.0002$, confirming that the gel-point is insensitive to whether the lattice is generated independently at each $p$ or cumulatively, as long as the spatial distribution of occupied sites is random.
+
+The gel-points bracket the complementary void-percolation threshold $1 - \pc = 1 - 0.3116 = 0.6884$ from below, with an offset of $0.0052$ in $p$. This offset is consistent with finite-size effects at $L = 500$ (the threshold shifts towards $1 - \pc$ as $L \to \infty$). The physical interpretation is direct: the walkers reside in the void sublattice, which undergoes its own site-percolation transition. The void sublattice loses spanning connectivity when the occupied fraction $p$ exceeds $1 - \pc$; at this point, walkers are confined to finite void clusters and their long-time diffusion becomes anomalous with $\alpha = 0.5$ at the transition. The Winter--Chambon gel criterion thus coincides with the void-phase percolation threshold, not with the occupied-cluster threshold $\pc$.
+
+Above $\pcprime$, $\alpha$ collapses sharply to near zero within $\Delta p \approx 0.03$, corresponding to complete walker arrest as the void phase fragments into disconnected pockets. This narrow transition width ($\sigma_\mathrm{sigmoid} = 0.015$ from a sigmoid fit) is characteristic of a sharp percolation-like transition.
+
+\subsection{Clustered growth raises the gel-point: the many-nuclei limit}
+\label{sec:results_templated}
+
+Figure~\ref{fig:fig2} shows $\alpha(p)$ for all four growth variants. The two adjacency-templated variants (6N and 26N) are indistinguishable from each other and, relative to the random ($\kappa = 0$) limit, differ in three quantitative respects.
+
+\textbf{Shifted gel-point.} Linear interpolation gives:
+\begin{align}
+  \pcprime(\text{6N templated})  &= 0.8856, \nonumber \\
+  \pcprime(\text{26N templated}) &= 0.8861,
+  \label{eq:pc_templated}
+\end{align}
+a shift of $\Delta\pcprime = +0.20$ relative to the random limit. The interpolation bracket spans only $[0.880, 0.890]$ (width $0.010\,\mathrm{in}\,p$), and $\alpha$ at the bracketing points is $(0.516, 0.487)$ for 6N and $(0.508, 0.495)$ for 26N — the crossing of $\alpha = 0.5$ is clean and well-resolved in both cases.
+
+\textbf{Broader transition.} A sigmoid fit to $\alpha(p)$ in the many-nuclei limit (padded with $\alpha = 0$ at $p = 1$) gives a transition width $\sigma_\mathrm{sigmoid} = 0.052$, compared to 0.015 for the random limit — a factor of 3.4 broader. The critical region extends over $\Delta p \approx 0.10$ rather than $\approx 0.03$.
+
+\textbf{Persistent sub-diffusion above $\pcprime$.} In the random limit, $\alpha$ drops to near zero ($\alpha < 0.05$) within $\Delta p \approx 0.03$ above $\pcprime$. For the many-nuclei morphology, $\alpha$ remains at $0.3$--$0.4$ even at $p = 0.95$ (Fig.~\ref{fig:fig2}b), $\Delta p = 0.064$ above $\pcprime$. This persistent sub-diffusion, absent in the random limit, is a dynamical signature of the more compact, clustered morphology: the connected cluster geometry maintains open, tortuous void channels at high occupation density, allowing slow but non-arrested walker motion far above the gel-point.
+
+Both the 6N and 26N adjacency rules give nearly identical results ($|\Delta\pcprime| = 0.0005$), showing that it is the \emph{connectivity constraint itself} — not the precise number of neighbours used to enforce it — that drives the gel-point shift. We therefore refer to these jointly as the many-nuclei (templated) morphology.
+
+This many-nuclei morphology is a specific point on the continuum introduced in Section~\ref{sec:results_kappa}, not a separate gelation class, and it should be distinguished from the single-seed Eden limit ($\kappa = 1$). In the templated variants, growth proceeds from \emph{many} independently seeded nuclei (each new $p$-step plants $N_\mathrm{seeds} \sim N_\mathrm{new}$ random seeds), producing a morphology of many compact blobs that coalesce as $p$ increases; this multi-seed topology yields $\pcprime \approx 0.886$. By contrast, the $\kappa = 1$ Eden limit uses a \emph{single} persistent seed and all subsequent growth is adjacency-driven, producing a single compact cluster that maintains open, connected void until $p \to 1$ (Fig.~\ref{fig:schematic}, bottom row). It is nucleation density — not the adjacency rule itself — that sets where a morphology falls between $\pcprime \approx 0.886$ (many nuclei) and $\pcprime \approx 0.993$ (single seed), with $\kappa$ providing continuous interpolation across the whole range.
+
+\subsection{Continuous tuning via $\kappa$-mixing}
+\label{sec:results_kappa}
+
+Figure~\ref{fig:fig3} shows $\alpha(p, \kappa)$ for all 18 values of $\kappa$, averaged over $N_s = 3$ replicates. The $\alpha = 0.5$ crossing shifts monotonically to higher $p$ as $\kappa$ increases from 0 (Bernoulli, dark) to 1 (single-seed Eden-like, light). Figure~\ref{fig:fig4} shows the extracted gel-point curve $\pcprime(\kappa)$.
+
+$\pcprime(\kappa)$ is monotonically increasing across the full parameter range, spanning $\pcprime \in [0.683, 0.993]$ and a tunable range:
+\begin{equation}
+  \Delta\pcprime = \pcprime(\kappa=1) - \pcprime(\kappa=0) \approx 0.31.
+  \label{eq:range}
+\end{equation}
+The value at $\kappa = 1.00$ is extrapolated: the measured $\alpha$ at $p = 0.99$ is $0.521 > 0.5$, indicating $\pcprime > 0.99$; a linear extrapolation from the three highest $p$ values gives $\pcprime(\kappa=1) \approx 0.993$. The divergence of $\pcprime$ towards unity as $\kappa \to 1$ is physically consistent with the single-seed Eden morphology in the thermodynamic limit, where a single compact cluster can in principle fill the lattice without fragmenting the void until $p \to 1$.
+
+Two regimes are visible in Fig.~\ref{fig:fig4}b, which plots $\pcprime$ against seed fraction $(1-\kappa)$ on a logarithmic scale:
+
+\begin{enumerate}
+  \item \emph{Bernoulli-like regime} ($\kappa \lesssim 0.99$, seed fraction $\gtrsim 1\%$): $\pcprime$ increases gradually from 0.683 to $\approx 0.91$ as $\kappa$ increases. The occupied network is seeded densely enough that the morphology remains qualitatively similar to random percolation, with many small clusters that merge as $p$ increases.
+
+  \item \emph{Eden regime} ($\kappa \gtrsim 0.99$, seed fraction $\lesssim 1\%$): $\pcprime$ rises steeply from $\approx 0.91$ towards unity. With only one or a handful of seeds, the cluster grows as a compact, connected body; the void space remains open to walker diffusion until very high $p$.
+\end{enumerate}
+
+The transition between regimes occurs near a seed fraction of $\sim 1\%$ of new sites per $p$-step (dashed line, Fig.~\ref{fig:fig4}b), corresponding to $\kappa \approx 0.99$.
+
+\subsection{Frequency-domain characterisation via the GSER}
+\label{sec:results_gser}
+
+To connect the simulation results to experimentally measurable rheology, MSD curves at and near $\pcprime$ are converted to $G'(\omega)$, $G''(\omega)$, and $\delta(\omega)$ via Eq.~(\ref{eq:gser}). Since the MSD follows a power law $\langle r^2(t)\rangle \propto t^\alpha$ throughout the anomalous window $[L_W/100, L_W/10]$, the GSER yields power-law moduli $G', G'' \propto \omega^\alpha$ with a frequency-independent phase angle $\delta(\omega) = 90\alpha$. Figure~\ref{fig:fig5} shows $G'(\omega)$, $G''(\omega)$, and $\delta(\omega)$ for representative $p$ values straddling $\pcprime$ in each class.
+
+At the gel-point ($p \approx \pcprime$), both the random and many-nuclei limits exhibit $\delta \approx 45°$ and $G'(\omega) \approx G''(\omega)$ across the accessible frequency range ($\omega \approx 0.4$--$4\,\mathrm{rad\,s^{-1}}$), confirming the Winter--Chambon criterion. For $p < \pcprime$ (sol state), $\delta > 45°$ and $G'' > G'$ at all frequencies, consistent with viscous-dominated response. For $p > \pcprime$ (gel state), $\delta < 45°$ and $G' > G''$, consistent with elastic-dominated response.
+
+The random and many-nuclei limits are distinguished in the frequency domain by the rate at which $\delta$ departs from $45°$ above the gel-point. For the random limit at $p = 0.700$ ($\Delta p = 0.017$ above $\pcprime$), $\delta$ falls to $31°$, indicating near-complete elastic arrest. For the many-nuclei limit at $p = 0.950$ ($\Delta p = 0.064$ above $\pcprime$), $\delta$ remains at $33°$ — comparable elastic character reached only at a far larger distance from the gel-point. This slower departure is a direct frequency-domain signature of the persistent sub-diffusion ($\alpha \approx 0.3$--$0.4$) observed in the time domain above $\pcprime$ for the more clustered morphology, and reflects the more open, tortuous void-channel structure maintained by compact cluster growth.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{figures/fig1_bernoulli_class.png}
+  \caption{\textbf{Gel-point in random percolation networks.}
+    Anomalous diffusion exponent $\alpha(p)$ for the two random-limit variants
+    (random percolation, blue; density increment, green) over the full range (a)
+    and the critical region (b). Both variants give indistinguishable gel-points at
+    $\pcprime = 0.683 \approx 1 - \pc$ (dashed blue vertical line), coinciding with
+    the loss of spanning connectivity in the void sublattice.
+    The dashed horizontal line marks the Winter--Chambon gel criterion $\alpha = 0.5$.
+    Simulation parameters: $L = 500$, $N_W = 3000$, $L_W = 10^6$ steps.}
+  \label{fig:fig1}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{figures/fig2_two_classes.png}
+  \caption{\textbf{Clustered growth raises the gel-point.}
+    $\alpha(p)$ for all four growth variants over the full range (a) and the
+    extended critical region $p \in [0.55, 1.0]$ (b).
+    Random-limit variants (circles: random percolation, blue; density increment, green)
+    cross $\alpha = 0.5$ sharply at $\pcprime = 0.683$ and arrest rapidly ($\alpha \to 0$
+    within $\Delta p \approx 0.03$).
+    Many-nuclei (templated) variants (squares: 6N, orange; 26N, purple) cross at
+    $\pcprime = 0.886$ ($\Delta\pcprime = +0.20$, indicated by the double-headed arrow
+    in panel a) and show persistent sub-diffusion ($\alpha \approx 0.3$--$0.4$) well
+    above $\pcprime$ (annotated in panel b) --- one point on the $\kappa$ continuum
+    of Fig.~\ref{fig:fig4}, not a distinct class.
+    Vertical dashed lines indicate $\pcprime$ for each variant.}
+  \label{fig:fig2}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{figures/fig5_gser.png}
+  \caption{\textbf{Frequency-domain GSER characterisation at the random and many-nuclei limits.}
+    \emph{Top row:} Elastic modulus $G'(\omega)$ (thick) and loss modulus $G''(\omega)$ (thin,
+    same colour) derived via the GSER for representative occupation densities $p$ at the random
+    limit (a) and the many-nuclei templated (6N) limit (b).
+    At both limits the gel-point condition ($p \approx \pcprime$, solid curve) yields
+    $G' \approx G''$ (annotated) across the accessible frequency range
+    ($\omega \approx 0.4$--$4\,\mathrm{rad\,s^{-1}}$), confirming the Winter--Chambon criterion.
+    Since the MSD follows a power law $\langle r^2(t)\rangle \propto t^\alpha$ throughout the
+    anomalous window, moduli satisfy $G', G'' \propto \omega^\alpha$ and the phase angle
+    $\delta = 90\alpha$ is frequency-independent (axes in panels a,b show $\omega$).
+    \emph{Bottom panel (c):} Phase angle $\delta = 90\alpha$ plotted against
+    $\Delta p = p - \pcprime$, the distance from each class's own gel-point,
+    so both curves are aligned at $\Delta p = 0$ regardless of their absolute $\pcprime$ values
+    (the $\omega$ axis of panels a,b does not appear here; $\delta$ is frequency-independent
+    and therefore a single number per $p$ value).
+    The random limit (blue circles) transitions sharply: $\delta$ reaches $22.5°$
+    at $\Delta p = 0.016$.
+    The many-nuclei limit (brown squares) transitions $\approx 4\times$ more gradually:
+    $\delta$ reaches $22.5°$ only at $\Delta p = 0.065$.
+    At $\Delta p = 0.064$ the random limit is nearly fully arrested ($\delta \approx 1°$)
+    while the many-nuclei limit retains $\delta \approx 23°$ — persistent sub-diffusion
+    arising from open, tortuous void channels maintained by compact cluster morphology.
+    Physical parameters: $T = 293\,\mathrm{K}$, $\eta = 1.2\times10^{-3}\,\mathrm{Pa\,s}$,
+    probe radius $a = 0.243\,\mu\mathrm{m}$, gel mesh size $l = 10\,\mathrm{nm}$.}
+  \label{fig:fig5}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{figures/fig1_alpha_vs_p.png}
+  \caption{\textbf{Continuously tunable $\alpha(p)$ via $\kappa$-mixing.}
+    Ensemble-averaged $\alpha(p)$ for all 18 values of $\kappa$, coloured from
+    $\kappa = 0$ (dark purple, Bernoulli) to $\kappa = 1$ (yellow, single-seed Eden-like).
+    Shaded bands indicate $\pm 1$ standard deviation over $N_s = 3$ replicates.
+    The $\alpha = 0.5$ crossing (dashed horizontal) shifts monotonically rightward
+    with increasing $\kappa$.
+    Panels: (a) full range $p \in [0, 1]$; (b) critical region $p \in [0.60, 1.00]$.
+    Dotted vertical lines mark the gel-point $\pcprime(\kappa)$ for each curve.
+    Simulation parameters: $L = 500$, $N_W = 3000$, $L_W = 10^6$, $N_s = 3$.}
+  \label{fig:fig3}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{figures/fig2_gel_point_tunable.png}
+  \caption{\textbf{Tunable gel-point $\pcprime(\kappa)$.}
+    (a) Gel-point $\pcprime$ as a function of nucleation-density parameter $\kappa$.
+    Filled circles are gel-points extracted by linear interpolation of $\alpha(p)$
+    through 0.5; blue shading indicates the interpolation bracket width ($p$-grid
+    resolution uncertainty). The starred symbol at $\kappa = 1.0$ denotes a linear
+    extrapolation ($\pcprime \approx 0.993$). Dotted horizontal lines mark the
+    random-limit ($\pcprime \approx 0.683$, blue) and many-nuclei templated ($\pcprime \approx 0.886$, red)
+    reference values from the base-case study; the double-headed arrow marks the
+    total tunable range $\Delta\pcprime \approx 0.31$.
+    (b) $\pcprime$ versus seed fraction $(1-\kappa)$ on a logarithmic scale,
+    revealing two physical regimes separated at $\sim 1\%$ seed fraction (dashed
+    vertical line): a Bernoulli-like regime ($\kappa \lesssim 0.99$) with gradual
+    increase, and an Eden regime ($\kappa \gtrsim 0.99$) with steep increase
+    towards unity. Upper axis shows corresponding $\kappa$ values.}
+  \label{fig:fig4}
+\end{figure}
+

@@ -1,0 +1,85 @@
+\documentclass[12pt]{article}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{subcaption}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{siunitx}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{natbib}
+\usepackage{setspace}
+\usepackage{lineno}
+\usepackage{xcolor}
+
+% Page setup
+\geometry{margin=1in}
+\onehalfspacing
+\linenumbers
+
+% Custom commands
+\newcommand{\msd}{\langle r^2(t) \rangle}
+\newcommand{\gsr}{G^*(\omega)}
+\newcommand{\gprime}{G'(\omega)}
+\newcommand{\gdoubleprime}{G''(\omega)}
+\newcommand{\pc}{p_c}
+\newcommand{\pcprime}{p_c'}
+\newcommand{\alphagrowth}{\alpha}
+\newcommand{\deltaphase}{\delta(\omega)}
+\newcommand{\omegafreq}{\omega}
+\newcommand{\pval}{p}
+\newcommand{\lattice}{L}
+\newcommand{\walker}{N_w}
+\newcommand{\steps}{N_s}
+
+% Title and authors
+\title{Tunable gel-point positioning in three-dimensional percolation networks via nucleation density control}
+
+\author{
+    {[Author Names]} \\
+    {[Affiliations]} \\
+    {[Email addresses]}
+}
+
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+% Abstract
+\input{sections/abstract}
+
+% Keywords
+\noindent\textbf{Keywords:} percolation, viscoelasticity, gel-point, microrheology, Winter--Chambon criterion, nucleation density, random walk, GSER
+
+% Main content
+\input{sections/introduction}
+\input{sections/methods}
+\input{sections/results}
+\input{sections/discussion}
+\input{sections/conclusions}
+
+% Acknowledgments
+\input{sections/acknowledgments}
+
+% References
+\bibliographystyle{naturemag}
+\bibliography{references_enhanced}
+
+% Appendices
+\appendix
+\input{appendices/appendix_a}
+\input{appendices/appendix_b}
+\input{appendices/appendix_c}
+\input{appendices/appendix_d}
+\input{appendices/appendix_e}
+
+\end{document}

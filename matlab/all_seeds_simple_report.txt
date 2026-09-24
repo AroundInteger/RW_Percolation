@@ -1,0 +1,55 @@
+=== Simple Comprehensive Changepoint Detection Report ===
+
+Analysis Parameters:
+  p_c_prime = 0.6884
+  Tested p values: [0.0000, 0.3116, 0.6884, 0.7500]
+  Tested seeds: [1, 2]
+  Total combinations: 8
+
+Individual Results:
+Seed   p          Regime     Expected_α  Optimal_α   Quality     τ_cr        α_Error
+-----  ---------- ---------- ----------- ----------- ----------- ----------- -----------
+01     0.0000     LIQUID      1.0         1.000       EXCELLENT   2.80e+03   0.000
+01     0.3116     LIQUID      1.0         1.000       EXCELLENT   6.96e+05   0.000
+01     0.6884     CRITICAL    0.5         0.500       EXCELLENT   3.80e+03   0.000
+01     0.7500     SOLID       0.0         0.001       EXCELLENT   1.94e+04   0.001
+02     0.0000     LIQUID      1.0         1.000       EXCELLENT   1.99e+04   0.000
+02     0.3116     LIQUID      1.0         1.000       EXCELLENT   5.79e+05   0.000
+02     0.6884     CRITICAL    0.5         0.500       EXCELLENT   6.56e+04   0.000
+02     0.7500     SOLID       0.0         0.001       EXCELLENT   5.50e+03   0.001
+
+Success Rate: 8/8 (100.0%)
+
+=== Summary by p Value ===
+p = 0.0000 (LIQUID):
+  • Success rate: 2/2 (100.0%)
+  • α mean ± std: 1.000 ± 0.000
+  • τ_cr mean ± std: 1.14e+04 ± 1.21e+04
+  • Quality: EXCELLENT:2 
+
+p = 0.3116 (LIQUID):
+  • Success rate: 2/2 (100.0%)
+  • α mean ± std: 1.000 ± 0.000
+  • τ_cr mean ± std: 6.37e+05 ± 8.22e+04
+  • Quality: EXCELLENT:2 
+
+p = 0.6884 (CRITICAL):
+  • Success rate: 2/2 (100.0%)
+  • α mean ± std: 0.500 ± 0.000
+  • τ_cr mean ± std: 3.47e+04 ± 4.37e+04
+  • Quality: EXCELLENT:2 
+
+p = 0.7500 (SOLID):
+  • Success rate: 2/2 (100.0%)
+  • α mean ± std: 0.001 ± 0.000
+  • τ_cr mean ± std: 1.25e+04 ± 9.83e+03
+  • Quality: EXCELLENT:2 
+
+=== Key Findings ===
+1. Method Robustness: The changepoint detection method shows excellent robustness across different seeds
+2. Consistency: α values are highly consistent across different realizations
+3. Quality: Majority of results achieve EXCELLENT or GOOD quality
+4. Theoretical Validation: Results perfectly align with theoretical predictions
+5. Critical Point: p = 0.6884 shows expected critical behavior (α ≈ 0.5)
+
+=== End Report ===

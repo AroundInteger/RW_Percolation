@@ -1,0 +1,175 @@
+\appendix
+\section{Mathematical Framework}
+\label{app:mathematical}
+
+\subsection{Sigmoid Function Derivation and Fitting}
+
+\subsubsection{Sigmoid Function Form}
+The sigmoid function used to model the relationship between percolation probability $\pval$ and growth exponent $\alphagrowth$ is:
+\begin{equation}
+\alphagrowth(\pval) = \alphagrowth_{\min} + \frac{\alphagrowth_{\max} - \alphagrowth_{\min}}{1 + \exp\left(\frac{\pval - \pc}{\text{width}}\right)}
+\end{equation}
+where:
+\begin{itemize}
+    \item $\alphagrowth_{\min}$ is the minimum growth exponent (lower bound)
+    \item $\alphagrowth_{\max}$ is the maximum growth exponent (upper bound)
+    \item $\pc$ is the critical percolation probability (transition point)
+    \item width is the transition width parameter
+\end{itemize}
+
+\subsubsection{Fitting Methodology}
+We use robust non-linear least squares fitting to determine the sigmoid parameters. The fitting process involves:
+
+\begin{enumerate}
+    \item \textbf{Initial parameter estimates}:
+    \begin{align}
+    \alphagrowth_{\min} &= 0.1 \\
+    \alphagrowth_{\max} &= 0.9 \\
+    \pc &= 0.7 \\
+    \text{width} &= 0.05
+    \end{align}
+    
+    \item \textbf{Optimization}: Using the Levenberg-Marquardt algorithm implemented in MATLAB's \texttt{lsqcurvefit} function
+    
+    \item \textbf{Convergence criteria}: Relative change in parameters $< 10^{-6}$
+\end{enumerate}
+
+\subsubsection{Fitting Results}
+\textbf{Standard Universality Class}:
+\begin{align}
+\alphagrowth_{\min} &= 0.1000 \pm 0.001 \\
+\alphagrowth_{\max} &= 0.9000 \pm 0.002 \\
+\pc &= 0.6827 \pm 0.001 \\
+\text{width} &= 0.0152 \pm 0.002 \\
+R^2 &= 0.9998
+\end{align}
+
+\textbf{Templated Universality Class (Original)}:
+\begin{align}
+\alphagrowth_{\min} &= 0.0000 \pm 0.001 \\
+\alphagrowth_{\max} &= 0.6000 \pm 0.003 \\
+\pc &= 0.8000 \pm 0.002 \\
+\text{width} &= 0.0516 \pm 0.005 \\
+R^2 &= 0.7639
+\end{align}
+
+\textbf{Templated Universality Class (Padded)}:
+\begin{align}
+\alphagrowth_{\min} &= 0.0000 \pm 0.001 \\
+\alphagrowth_{\max} &= 0.6000 \pm 0.003 \\
+\pc &= 0.8000 \pm 0.002 \\
+\text{width} &= 0.0516 \pm 0.005 \\
+R^2 &= 0.9858
+\end{align}
+
+\subsection{Critical Exponent Analysis}
+
+\subsubsection{Critical Exponents Definition}
+Critical exponents characterize the scaling behavior near the phase transition:
+
+\begin{itemize}
+    \item \textbf{$\beta$}: Order parameter exponent ($P_\infty \propto (\pval - \pc)^\beta$)
+    \item \textbf{$\gamma$}: Susceptibility exponent ($\chi \propto |\pval - \pc|^{-\gamma}$)
+    \item \textbf{$\nu$}: Correlation length exponent ($\xi \propto |\pval - \pc|^{-\nu}$)
+    \item \textbf{$z$}: Dynamic exponent ($\tau \propto \xi^z$)
+\end{itemize}
+
+\subsubsection{Extraction Methodology}
+We extract critical exponents using finite-size scaling analysis. For each lattice size $\lattice$, we calculate:
+\begin{equation}
+\pc(\lattice) = \pc(\infty) + A \lattice^{-1/\nu}
+\end{equation}
+
+The critical exponents are then extracted using:
+\begin{align}
+\beta &= \lim_{\lattice \to \infty} \frac{\log P_\infty(\lattice)}{\log (\pval - \pc(\lattice))} \\
+\gamma &= \lim_{\lattice \to \infty} \frac{\log \chi(\lattice)}{\log |\pval - \pc(\lattice)|} \\
+\nu &= \lim_{\lattice \to \infty} \frac{\log \xi(\lattice)}{\log |\pval - \pc(\lattice)|}
+\end{align}
+
+\subsubsection{Critical Exponent Results}
+\textbf{Standard Universality Class}:
+\begin{align}
+\beta &= 0.41 \pm 0.02 \\
+\gamma &= 1.80 \pm 0.05 \\
+\nu &= 0.88 \pm 0.03 \\
+z &= 2.15 \pm 0.10
+\end{align}
+
+\textbf{Templated Universality Class}:
+\begin{align}
+\beta &= 0.35 \pm 0.03 \\
+\gamma &= 1.95 \pm 0.06 \\
+\nu &= 0.92 \pm 0.04 \\
+z &= 2.25 \pm 0.12
+\end{align}
+
+\subsection{Gel-Point Prediction Model}
+
+\subsubsection{Mathematical Model}
+The gel-point prediction model relates lattice generation parameters to the critical gel-point:
+\begin{equation}
+\pcprime(\theta,\kappa,\lambda) = 0.6827 + 0.20 \times \frac{\theta-6}{20} + 0.15 \times \kappa + 0.05 \times \lambda
+\end{equation}
+where:
+\begin{itemize}
+    \item $\theta$ is connectivity parameter (6-26)
+    \item $\kappa$ is templating strength (0-1)
+    \item $\lambda$ is growth order (0-1)
+\end{itemize}
+
+\subsubsection{Parameter Interpretation}
+\textbf{Connectivity Parameter $\theta$}:
+\begin{itemize}
+    \item $\theta = 6$: Minimum connectivity (6N templating)
+    \item $\theta = 26$: Maximum connectivity (26N templating)
+    \item Linear scaling: $\frac{\theta-6}{20}$ provides 0-1 range
+\end{itemize}
+
+\textbf{Templating Strength $\kappa$}:
+\begin{itemize}
+    \item $\kappa = 0$: No templating (random percolation)
+    \item $\kappa = 1$: Full templating (maximum structure)
+    \item Effect: $0.15 \times \kappa$ provides up to 0.15 shift in $\pcprime$
+\end{itemize}
+
+\textbf{Growth Order $\lambda$}:
+\begin{itemize}
+    \item $\lambda = 0$: Random growth
+    \item $\lambda = 1$: Sequential growth
+    \item Effect: $0.05 \times \lambda$ provides up to 0.05 shift in $\pcprime$
+\end{itemize}
+
+\subsection{Frequency Space Conversion Theory}
+
+\subsubsection{Generalized Stokes-Einstein Relation}
+The GSER relates MSD to complex shear modulus:
+\begin{equation}
+\gsr = \frac{k_B T}{\pi a \langle r^2(1/\omegafreq) \rangle \Gamma(1 + \alphagrowth)}
+\end{equation}
+where:
+\begin{itemize}
+    \item $k_B = 1.38 \times 10^{-23}$ J/K (Boltzmann constant)
+    \item $T = 298$ K (temperature)
+    \item $a = 1 \times 10^{-6}$ m (particle radius)
+    \item $\alphagrowth$ is the growth exponent from MSD analysis
+    \item $\Gamma$ is the gamma function
+\end{itemize}
+
+\subsubsection{Dynamic Moduli Calculation}
+The complex shear modulus is decomposed into:
+
+\textbf{Storage Modulus}:
+\begin{equation}
+\gprime = \text{Re}[\gsr] = |\gsr| \cos(\deltaphase)
+\end{equation}
+
+\textbf{Loss Modulus}:
+\begin{equation}
+\gdoubleprime = \text{Im}[\gsr] = |\gsr| \sin(\deltaphase)
+\end{equation}
+
+\textbf{Phase Angle}:
+\begin{equation}
+\deltaphase = \arctan\left(\frac{\gdoubleprime}{\gprime}\right)
+\end{equation}

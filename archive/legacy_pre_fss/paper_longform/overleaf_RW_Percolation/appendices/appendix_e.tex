@@ -1,0 +1,225 @@
+\section{Computational Implementation}
+\label{app:computational}
+
+\subsection{MATLAB Code Structure}
+
+\subsubsection{Main Framework}
+The analysis is implemented in MATLAB. The directory listing below is illustrative of the analysis organisation rather than a verbatim copy of the repository; the authoritative source is the repository itself.
+
+\begin{verbatim}
+matlab/
+├── complete_characterization_framework.m    # Main framework
+├── universality_class_analysis.m            # Universality class analysis
+├── frequency_space_analysis.m               # Frequency space conversion
+├── tunable_gel_point_positioning.m          # Gel-point positioning
+├── sigmoid_universality_analysis.m          # Sigmoid fitting
+├── padded_templated_sigmoid_analysis.m      # Padded sigmoid
+├── extract_critical_exponents.m             # Critical exponent extraction
+├── analyze_pore_size_distributions.m        # Pore-size analysis
+├── calculate_obstruction_probability.m      # Obstruction probability
+└── helper_functions/                        # Helper functions
+    ├── sigmoid_function.m
+    ├── calculate_dynamic_moduli.m
+    ├── predict_gel_point.m
+    └── find_optimal_lattice_method.m
+\end{verbatim}
+
+\subsubsection{Data Management}
+\textbf{Input Data}:
+\begin{itemize}
+    \item \textbf{Lattice files}: \texttt{.mat} files containing lattice structures
+    \item \textbf{MSD data}: \texttt{.csv} files with MSD results
+    \item \textbf{Parameters}: Configuration files with simulation parameters
+\end{itemize}
+
+\textbf{Output Data}:
+\begin{itemize}
+    \item \textbf{Results}: \texttt{.mat} files with analysis results
+    \item \textbf{Plots}: \texttt{.png} files with visualizations
+    \item \textbf{Reports}: \texttt{.txt} files with summary reports
+\end{itemize}
+
+\subsubsection{Performance Optimisation}
+\textbf{Parallel Computing}:
+\begin{itemize}
+    \item \textbf{parfor loops}: Parallel processing for multiple $\pval$-values
+    \item \textbf{Parallel pools}: Automatic pool management
+    \item \textbf{Memory optimisation}: Efficient data handling
+\end{itemize}
+
+\textbf{Memory Management}:
+\begin{itemize}
+    \item \textbf{Data streaming}: Process large datasets in chunks
+    \item \textbf{Memory cleanup}: Automatic garbage collection
+    \item \textbf{Efficient storage}: Compressed data formats
+\end{itemize}
+
+\subsection{User Guide and Examples}
+
+\subsubsection{Basic Usage}
+\begin{verbatim}
+% Load the analysis framework
+load('Clusters1/output/complete_characterization_framework.mat');
+
+% Predict phase transition properties
+[alpha, G_storage, G_loss, delta] = predict_phase_transition_properties(0.75, '6N', 0.5, 0.8, framework);
+
+% Find optimal lattice method
+optimal_method = find_optimal_lattice_method(0.75, 'Sharp', framework);
+\end{verbatim}
+
+\subsubsection{Advanced Usage}
+\begin{verbatim}
+% Custom material design
+target_properties = struct();
+target_properties.gel_point = 0.78;
+target_properties.frequency_response = 'Broadband';
+target_properties.application = 'General purpose';
+
+% Design material
+material_design = design_material(target_properties, framework);
+
+% Validate design
+validation_results = validate_material_design(material_design, framework);
+\end{verbatim}
+
+\subsubsection{Batch Processing}
+\begin{verbatim}
+% Process multiple materials
+materials = {'Hydrogel', 'Gel', 'Scaffold', 'Sensor'};
+target_pcs = [0.72, 0.78, 0.85, 0.75];
+
+for i = 1:length(materials)
+    [alpha, G_storage, G_loss, delta] = predict_phase_transition_properties(...
+        target_pcs(i), '6N', 0.5, 0.8, framework);
+    
+    fprintf('Material: %s, α = %.3f, G'' = %.2e Pa, G" = %.2e Pa, δ = %.1f°\n', ...
+        materials{i}, alpha, G_storage, G_loss, delta);
+end
+\end{verbatim}
+
+\subsection{Open-Source Availability}
+
+\subsubsection{Code Repository}
+The analysis code is available as open-source software:
+
+\begin{itemize}
+    \item \textbf{Repository}: [GitHub Link]
+    \item \textbf{License}: MIT License
+    \item \textbf{Documentation}: Comprehensive user guide and API documentation
+    \item \textbf{Examples}: Extensive example scripts and tutorials
+\end{itemize}
+
+\subsubsection{Installation Instructions}
+\begin{enumerate}
+    \item \textbf{Clone repository}: \texttt{git clone [repository\_url]}
+    \item \textbf{Install MATLAB}: Version R2020a or later
+    \item \textbf{Install toolboxes}: Statistics and Machine Learning Toolbox
+    \item \textbf{Run examples}: Execute example scripts to verify installation
+\end{enumerate}
+
+\subsubsection{Contributing Guidelines}
+\textbf{Code Contributions}:
+\begin{itemize}
+    \item Follow MATLAB coding standards
+    \item Include comprehensive documentation
+    \item Add unit tests for new functions
+    \item Submit pull requests for review
+\end{itemize}
+
+\textbf{Documentation Contributions}:
+\begin{itemize}
+    \item Update user guide for new features
+    \item Add examples for new functionality
+    \item Improve API documentation
+    \item Translate documentation to other languages
+\end{itemize}
+
+\subsection{Performance Benchmarks}
+
+\subsubsection{Computational Performance}
+\textbf{Lattice Generation}:
+\begin{itemize}
+    \item \textbf{Random percolation}: 0.1 seconds per lattice
+    \item \textbf{6N templating}: 0.5 seconds per lattice
+    \item \textbf{26N templating}: 2.0 seconds per lattice
+    \item \textbf{Density increment}: 0.3 seconds per lattice
+\end{itemize}
+
+\textbf{Random Walk Simulation}:
+\begin{itemize}
+    \item \textbf{1M steps}: 10 seconds per walker
+    \item \textbf{3K walkers}: 30 seconds total
+    \item \textbf{Memory usage}: 2 GB peak
+    \item \textbf{CPU usage}: 100\% (single core)
+\end{itemize}
+
+\textbf{Analysis and Prediction}:
+\begin{itemize}
+    \item \textbf{Morphology comparison}: 5 seconds
+    \item \textbf{Frequency space conversion}: 2 seconds
+    \item \textbf{Gel-point prediction}: 0.1 seconds
+    \item \textbf{Material design}: 1 second
+\end{itemize}
+
+\subsubsection{Scalability Analysis}
+\textbf{Lattice Size Scaling}:
+\begin{itemize}
+    \item \textbf{$\lattice = 100$}: 1x baseline
+    \item \textbf{$\lattice = 200$}: 8x baseline
+    \item \textbf{$\lattice = 500$}: 125x baseline
+    \item \textbf{$\lattice = 1000$}: 1000x baseline
+\end{itemize}
+
+\textbf{Walker Number Scaling}:
+\begin{itemize}
+    \item \textbf{1K walkers}: 1x baseline
+    \item \textbf{3K walkers}: 3x baseline
+    \item \textbf{10K walkers}: 10x baseline
+    \item \textbf{30K walkers}: 30x baseline
+\end{itemize}
+
+\textbf{Memory Requirements}:
+\begin{itemize}
+    \item \textbf{$\lattice = 500$, 3K walkers}: 2 GB
+    \item \textbf{$\lattice = 1000$, 10K walkers}: 16 GB
+    \item \textbf{$\lattice = 2000$, 30K walkers}: 128 GB
+\end{itemize}
+
+\subsection{Code Quality and Documentation}
+
+\subsubsection{Code Standards}
+\begin{itemize}
+    \item \textbf{MATLAB style guide}: Consistent naming conventions
+    \item \textbf{Function documentation}: Comprehensive help text
+    \item \textbf{Error handling}: Robust error checking and reporting
+    \item \textbf{Unit testing}: Automated testing for all functions
+\end{itemize}
+
+\subsubsection{Documentation}
+\begin{itemize}
+    \item \textbf{User guide}: Step-by-step instructions
+    \item \textbf{API reference}: Complete function documentation
+    \item \textbf{Examples}: Working code examples
+    \item \textbf{Tutorials}: Guided learning materials
+\end{itemize}
+
+\subsection{Reproducibility and Validation}
+
+\subsubsection{Reproducibility Features}
+\begin{itemize}
+    \item \textbf{Random seed control}: Deterministic results
+    \item \textbf{Version control}: Git repository with full history
+    \item \textbf{Dependency management}: Clear requirements
+    \item \textbf{Test suite}: Automated validation
+\end{itemize}
+
+\subsubsection{Validation Framework}
+\begin{itemize}
+    \item \textbf{Unit tests}: Individual function testing
+    \item \textbf{Integration tests}: End-to-end workflow testing
+    \item \textbf{Regression tests}: Prevent breaking changes
+    \item \textbf{Performance tests}: Benchmark validation
+\end{itemize}
+
+This computational implementation is intended to keep the analysis accessible and reproducible for the scientific community.

@@ -1,0 +1,253 @@
+% prl_main.bib — curated bibliography: ONLY the references cited in the
+% manuscript (auto-extracted from references_enhanced.bib). Point prl_main.tex
+% at this file with \bibliography{prl_main}. Master superset stays in
+% references_enhanced.bib.
+
+@article{Chambon1987,
+  title={Linear Viscoelasticity at the Gel Point of a Crosslinking PDMS with Imbalanced Stoichiometry},
+  author={Chambon, F},
+  journal={Journal of Rheology},
+  volume={31},
+  number={8},
+  pages={683--697},
+  year={1987},
+  publisher={Society of Rheology},
+  doi={10.1122/1.549955}
+}
+
+@article{Winter1987,
+  title={Analysis of linear viscoelasticity of a crosslinking polymer at the gel point},
+  author={Winter, H. Henning and Chambon, Fran{\c{c}}ois},
+  journal={Journal of Rheology},
+  volume={30},
+  number={2},
+  pages={367--382},
+  year={1986},
+  publisher={The Society of Rheology}
+}
+
+@article{Mason1995,
+  title={Optical measurements of frequency-dependent linear viscoelastic moduli of complex fluids},
+  author={Mason, Thomas G and Weitz, David A},
+  journal={Physical Review Letters},
+  volume={74},
+  number={7},
+  pages={1250--1253},
+  year={1995},
+  publisher={American Physical Society},
+  doi={10.1103/PhysRevLett.74.1250}
+}
+
+@article{Mason2000,
+  title={Estimating the viscoelastic moduli of complex fluids using the generalized Stokes-Einstein equation},
+  author={Mason, Thomas G},
+  journal={Rheologica Acta},
+  volume={39},
+  number={4},
+  pages={371--378},
+  year={2000},
+  publisher={Springer},
+  doi={10.1007/s003970000094}
+}
+
+@article{Squires2010fluid,
+  title={Fluid mechanics of microrheology},
+  author={Squires, Todd M and Mason, Thomas G},
+  journal={Annual Review of Fluid Mechanics},
+  volume={42},
+  pages={413--438},
+  year={2010},
+  publisher={Annual Reviews}
+}
+
+@book{Rubinstein2003,
+  title={Polymer Physics},
+  author={Rubinstein, Michael and Colby, Ralph H.},
+  year={2003},
+  publisher={Oxford University Press},
+  address={Oxford}
+}
+
+@book{Larson1999,
+  title={The Structure and Rheology of Complex Fluids},
+  author={Larson, Ronald G.},
+  year={1999},
+  publisher={Oxford University Press},
+  address={New York}
+}
+
+@article{Trappe2001,
+  title={Jamming phase diagram for attractive particles},
+  author={Trappe, V. and Prasad, V. and Cipelletti, L. and Segre, P. N. and Weitz, D. A.},
+  journal={Nature},
+  volume={411},
+  number={6839},
+  pages={772--775},
+  year={2001},
+  publisher={Nature Publishing Group}
+}
+
+@article{Gibaud2012,
+  title={PLACEHOLDER -- colloidal-gel structure/rheology (Gibaud et al., 2012); confirm exact reference},
+  author={Gibaud, T. and others},
+  journal={},
+  year={2012},
+  note={VERIFY: exact citation to be confirmed by the authors}
+}
+
+@article{Ng2016,
+  title={PLACEHOLDER -- network-forming colloidal microrheology (Ng et al., 2016); confirm exact reference},
+  author={Ng, T. S. K. and others},
+  journal={},
+  year={2016},
+  note={VERIFY: exact citation to be confirmed by the authors}
+}
+
+@article{Larsen2008,
+  title={Microrheology of the liquid-solid transition during gelation},
+  author={Larsen, T H and Furst, E M},
+  journal={Physical Review Letters},
+  volume={100},
+  number={14},
+  pages={146001},
+  year={2008},
+  publisher={American Physical Society},
+  doi={10.1103/PhysRevLett.100.146001}
+}
+
+@article{Corrigan2009,
+  title   = {Particle tracking microrheology of gel-forming amyloid fibril networks},
+  author  = {Corrigan, A. M. and Donald, A. M.},
+  journal = {The European Physical Journal E},
+  volume  = {28}, number = {4}, pages = {457--462}, year = {2009},
+  doi     = {10.1140/epje/i2008-10439-7}}
+
+@article{Anderson1988,
+  title   = {Percolation in an interactive cluster-growth model},
+  author  = {Anderson, Scott R. and Family, Fereydoon},
+  journal = {Physical Review A},
+  volume  = {38}, number = {8}, pages = {4198--4204}, year = {1988},
+  doi     = {10.1103/PhysRevA.38.4198}}
+
+@article{Roy2017,
+  title   = {First-order transition in a percolation model with nucleation and preferential growth},
+  author  = {Roy, Bappaditya and Santra, S. B.},
+  journal = {Physical Review E},
+  volume  = {95}, number = {1}, pages = {010101}, year = {2017},
+  doi     = {10.1103/PhysRevE.95.010101}}
+
+@article{Roy2018,
+  title   = {Finite size scaling study of a two parameter percolation model: Constant and correlated growth},
+  author  = {Roy, Bappaditya and Santra, S. B.},
+  journal = {Physica A: Statistical Mechanics and its Applications},
+  volume  = {492}, pages = {969--979}, year = {2018},
+  doi     = {10.1016/j.physa.2017.11.028}}
+
+@article{DSouzaNagler2015,
+  title   = {Anomalous critical and supercritical phenomena in explosive percolation},
+  author  = {D'Souza, Raissa M. and Nagler, Jan},
+  journal = {Nature Physics},
+  volume  = {11}, number = {7}, pages = {531--538}, year = {2015},
+  doi     = {10.1038/nphys3378}}
+
+@article{deBruyn2013,
+  title={Modeling the microrheology of inhomogeneous media},
+  author={de Bruyn, J R},
+  journal={Journal of Non-Newtonian Fluid Mechanics},
+  volume={193},
+  pages={21--27},
+  year={2013},
+  publisher={Elsevier},
+  doi={10.1016/j.jnnfm.2012.06.011}
+}
+
+@article{Rich2011,
+  title={Size dependence of microprobe dynamics during gelation of a discotic colloidal clay},
+  author={Rich, J P and McKinley, G H and Doyle, P S},
+  journal={Journal of Rheology},
+  volume={55},
+  number={2},
+  pages={273--299},
+  year={2011},
+  publisher={Society of Rheology},
+  doi={10.1122/1.3532979}
+}
+
+@article{Oppong2006,
+  title={Microrheology and structure of a yield-stress polymer gel},
+  author={Oppong, F K and Rubatat, L and Frisken, B J and Bailey, A E and De Bruyn, J R},
+  journal={Physical Review E},
+  volume={73},
+  number={4},
+  pages={041405},
+  year={2006},
+  publisher={American Physical Society},
+  doi={10.1103/PhysRevE.73.041405}
+}
+
+@article{Muthukumar1989,
+  title={Screening Effect on Viscoelasticity near the Gel Point},
+  author={Muthukumar, M},
+  journal={Macromolecules},
+  volume={22},
+  number={12},
+  pages={4656--4658},
+  year={1989},
+  publisher={American Chemical Society},
+  doi={10.1021/ma00202a050}
+}
+
+@misc{SM,
+  note={See Supplemental Material for the lattice and random-walk model, the nucleation-density growth algorithm, the finite-size-scaling protocol and full results (including $\pcp(L)$ and exponent tables), the fixed-$L$ gel-point curve, the GSER spectra, robustness checks on the growth rule, and computational details.}
+}
+
+@incollection{Eden1961,
+  title={A two-dimensional growth process},
+  author={Eden, Murray},
+  booktitle={Proceedings of the Fourth Berkeley Symposium on Mathematical Statistics and Probability, Volume 4: Biology and Problems of Health},
+  pages={223--239},
+  year={1961},
+  publisher={University of California Press},
+  address={Berkeley}
+}
+
+@article{Gefen1983,
+  title   = {Anomalous Diffusion on Percolating Clusters},
+  author  = {Gefen, Yuval and Aharony, Amnon and Alexander, Shlomo},
+  journal = {Physical Review Letters},
+  volume  = {50}, number = {1}, pages = {77--80}, year = {1983},
+  doi     = {10.1103/PhysRevLett.50.77}}
+
+@article{Havlin1983,
+  title={Scaling behavior of diffusion on percolation clusters},
+  author={Havlin, S and Ben-Avraham, D and Sompolinsky, H},
+  journal={Physical Review A},
+  volume={27},
+  number={3},
+  pages={1730--1733},
+  year={1983},
+  publisher={American Physical Society},
+  doi={10.1103/PhysRevA.27.1730}
+}
+
+@article{Straley1980,
+  title   = {The ant in the labyrinth: diffusion in random networks near the percolation threshold},
+  author  = {Straley, J. P.},
+  journal = {Journal of Physics C: Solid State Physics},
+  volume  = {13}, number = {16}, pages = {2991--3002}, year = {1980},
+  doi     = {10.1088/0022-3719/13/16/009}}
+
+@article{Kammerer2008,
+  title   = {Cluster-resolved dynamic scaling theory and universal corrections for transport on percolating systems},
+  author  = {Kammerer, Axel and H{\"o}fling, Felix and Franosch, Thomas},
+  journal = {Europhysics Letters (EPL)},
+  volume  = {84}, number = {6}, pages = {66002}, year = {2008},
+  doi     = {10.1209/0295-5075/84/66002}}
+
+@article{AlexanderOrbach1982,
+  title   = {Density of states on fractals: ``fractons''},
+  author  = {Alexander, S. and Orbach, R.},
+  journal = {Journal de Physique Lettres},
+  volume  = {43}, number = {17}, pages = {L625--L631}, year = {1982},
+  doi     = {10.1051/jphyslet:019820043017062500}}
+

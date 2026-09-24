@@ -1,0 +1,98 @@
+\section{Detailed Analysis Results}
+\label{app:detailed}
+
+\subsection{Morphology comparison}
+
+\subsubsection{Two morphologies, not two universality classes}
+We compared the lattice generation methods as morphologies along the nucleation-density continuum, not as candidate universality classes. The two limits are:
+
+\textbf{Random limit}:
+\begin{itemize}
+    \item \textbf{Methods}: Random\_Percolation, Density\_Increment
+    \item \textbf{Characteristics}: Early gel-point, sharp transition
+    \item \textbf{Gel-point}: $\pcprime = 0.6827 \pm 0.0106$
+    \item \textbf{Transition width}: $0.0152 \pm 0.0106$
+\end{itemize}
+
+\textbf{Many-nuclei (templated) limit}:
+\begin{itemize}
+    \item \textbf{Methods}: 6N\_Templated, 26N\_Templated
+    \item \textbf{Characteristics}: Delayed gel-point, broader transition
+    \item \textbf{Gel-point}: $\pcprime \approx 0.886$ (interpolated); the unpadded sigmoid fit gives $0.80 \pm 0.14$
+    \item \textbf{Transition width}: $0.0516$ (padded fit)
+\end{itemize}
+
+\subsubsection{What the fits do and do not establish}
+The difference in gel-point and transition width between the two limits is clear in the directly interpolated data (Appendix~\ref{app:mathematical}). The formal sigmoid-fit comparison, however, does \emph{not} establish it: the unpadded many-nuclei fit is too poorly constrained, and the analysis output reports the gel-point and width differences as not statistically significant on that fit (significance $0.84$ and $0.40$ respectively, i.e.\ well above any conventional threshold). No $t$-test or ANOVA was performed, and no claim of statistically distinct universality classes is made. The robust statement is the morphological one: clustered growth shifts and broadens the gel-point transition.
+
+\subsection{Pore-Size Distribution Studies}
+
+\subsubsection{Pore Definition}
+We define a pore as a connected cluster of unoccupied sites with 26-neighbour connectivity in 3D. The pore identification algorithm:
+
+\begin{enumerate}
+    \item Find all unoccupied sites in the lattice
+    \item Use 26-neighbour connectivity for pore identification
+    \item Find connected components using breadth-first search
+    \item Calculate pore size as the number of sites in each component
+\end{enumerate}
+
+\subsubsection{Pore-Size Distribution Analysis}
+We analysed pore-size distributions for all lattice types and $\pval$-values. The analysis reports the scaling of the maximum and mean pore size with $(1-p)$, not a cluster-size exponent $\tau$ (the $\tau$ fit did not converge). The measured exponents of $s_{\max} \propto (1-p)^{-\alpha_{\max}}$ and $s_{\mathrm{mean}} \propto (1-p)^{-\alpha_{\mathrm{mean}}}$ are:
+
+\begin{itemize}
+    \item \textbf{Random percolation}: $\alpha_{\max} = -1.308$ ($R^2 = 0.951$), $\alpha_{\mathrm{mean}} = -8.789$ ($R^2 = 0.963$)
+    \item \textbf{Density increment}: $\alpha_{\max} = -1.310$ ($R^2 = 0.950$), $\alpha_{\mathrm{mean}} = -8.838$ ($R^2 = 0.958$)
+    \item \textbf{Templated 6N}: $\alpha_{\max} = -1.075$ ($R^2 = 0.999$), $\alpha_{\mathrm{mean}} = -3.612$ ($R^2 = 0.713$)
+    \item \textbf{Templated 26N}: $\alpha_{\max} = -1.074$ ($R^2 = 0.999$), $\alpha_{\mathrm{mean}} = -4.551$ ($R^2 = 0.561$)
+\end{itemize}
+
+The two random-limit variants agree with each other, and the two templated variants agree with each other; the mean-pore-size exponent is appreciably smaller in magnitude for the clustered morphologies, consistent with their void remaining connected to higher occupation. The mean-pore-size fits for the templated variants are only moderately good ($R^2 \approx 0.6$--$0.7$) and should be read as indicative. No claim of an exponential-versus-power-law distribution, or of distinct universality classes, is made.
+
+\subsubsection{Pore-Size Impact on Viscoelasticity}
+Large pores in templated lattices promote/maintain large MSD magnitudes:
+
+\begin{enumerate}
+    \item \textbf{Obstruction probability}: $P_{\text{obstruction}} \propto \text{pore\_size}^{-1}$
+    \item \textbf{Effective diffusion}: $D_{\text{eff}} \propto \text{pore\_size}^2$
+    \item \textbf{MSD enhancement}: Large pores lead to enhanced MSD
+\end{enumerate}
+
+\subsection{Obstruction Probability Calculations}
+
+\subsubsection{Mathematical Foundation}
+The obstruction probability $P_{\text{obstruction}}$ is calculated from pore-size distributions:
+\begin{equation}
+P_{\text{obstruction}} = 1 - \exp\left(-\frac{\langle \text{pore\_size} \rangle}{\xi}\right)
+\end{equation}
+where:
+\begin{itemize}
+    \item $\langle \text{pore\_size} \rangle$ is the mean pore size
+    \item $\xi$ is the correlation length
+\end{itemize}
+
+\subsubsection{Correlation Length Analysis}
+The correlation length $\xi$ is related to pore size and obstruction probability:
+\begin{equation}
+\xi = \xi_0 |\pval - \pc|^{-\nu}
+\end{equation}
+where:
+\begin{itemize}
+    \item $\xi_0$ is the correlation length amplitude
+    \item $\nu$ is the correlation length exponent
+    \item $\pc$ is the critical percolation probability
+\end{itemize}
+
+\subsubsection{Obstruction Probability Results}
+The computed obstruction probability is small across the whole range studied and does not show the sharp rise described by the schematic above. Averaged over the analysed $\pval$-values the analysis output gives:
+
+\begin{itemize}
+    \item \textbf{Random percolation and density increment}: mean $P_{\text{obstruction}} \approx 0.0037$ (range $0$ to $0.0445$)
+    \item \textbf{Templated 6N and 26N}: mean $P_{\text{obstruction}} \approx 0.0002$ (range $0.0001$ to $0.0010$)
+\end{itemize}
+
+The clustered morphologies are less obstructed than the random limit, consistent with their more connected void, but the absolute values are far smaller than a percolation-style crossover and no such crossover is resolved by this estimator.
+
+\subsection{Critical exponents and finite-size scaling}
+
+The static exponents $\beta$, $\gamma$, $\nu$ and the dynamic exponent $z$ were not extracted in this work, and the scaling-relation checks (Rushbrooke, Fisher) and per-morphology scaling functions previously listed here are withdrawn: they were not computed from the data. The finite-size scaling of the \emph{dynamical} gel-point $\pcprime(L)$ --- the extrapolated $\pcprime(\infty)$ and the effective exponent $\nu_{\mathrm{eff}} \approx 1.6$ with no systematic trend for $\kappa \le 0.8$ --- is reported in Appendix~\ref{app:mathematical} and supersedes the single-lattice-size ($L = 500$) gel-points quoted above. The transition widths quoted above remain single-size quantities.

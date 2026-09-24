@@ -1,0 +1,261 @@
+% ======================================================================
+%  Supplemental Material
+%  Nucleation density programs the viscoelastic gel point of a percolation network
+%  REVTeX 4.2
+% ======================================================================
+\documentclass[aps,prl,onecolumn,superscriptaddress,nofootinbib]{revtex4-2}
+
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\usepackage{bm}
+\usepackage{booktabs}
+\usepackage[colorlinks=true,allcolors=blue]{hyperref}
+
+\graphicspath{{figures_v2/}{./}}
+
+% S-prefixed numbering for SM
+\renewcommand{\thesection}{S\Roman{section}}
+\renewcommand{\thefigure}{S\arabic{figure}}
+\renewcommand{\thetable}{S\arabic{table}}
+\renewcommand{\theequation}{S\arabic{equation}}
+
+\newcommand{\msd}{\langle r^2(t)\rangle}
+\newcommand{\pc}{p_c}
+\newcommand{\pcp}{p_c'}
+\newcommand{\kap}{\kappa}
+\newcommand{\nueff}{\nu_{\mathrm{eff}}}
+
+\begin{document}
+
+\title{Supplemental Material:\\ Nucleation density programs the viscoelastic gel point of a percolation network}
+\author{A.~Author}
+\author{B.~Author}
+\author{C.~Author}
+\author{D.~Author}
+\affiliation{[Affiliation], [Institution], [City], [Country]}
+\date{\today}
+\maketitle
+
+This Supplemental Material gives the lattice and random-walk model, the nucleation-density
+growth algorithm, the finite-size-scaling protocol and its full results, the fixed-$L$
+gel-point curve, the frequency-domain (GSER) analysis, robustness checks on the growth rule,
+and computational details. Equation, figure, and table numbers are prefixed ``S''.
+
+% ======================================================================
+\section{Lattice model and the nucleation-density ($\kap$) growth algorithm}
+% ======================================================================
+We use a simple cubic lattice of side $L$ with periodic boundary conditions. Each site is
+\emph{occupied} (network phase) or \emph{unoccupied} (void/fluid phase); the occupation
+probability $p$ sets the target occupied count $N_{\mathrm{target}}=\lfloor pL^3\rceil$.
+Lattices are built cumulatively over the $p$-sweep, so the occupied set at higher $p$ contains
+that at lower $p$ as a subset---consistent with progressive gelation and ensuring continuity of
+$\alpha(p)$.
+
+Growth is governed by a nucleation-density parameter $\kap\in[0,1]$. At each increment, of the
+$N_{\mathrm{new}}$ sites to be added,
+\begin{equation}
+  N_{\mathrm{seeds}}=\big\lfloor(1-\kap)\,N_{\mathrm{new}}\big\rceil
+\end{equation}
+are placed at uniformly random unoccupied positions (independent nuclei), and the remaining
+$N_{\mathrm{new}}-N_{\mathrm{seeds}}$ are grown by 6-neighbor (face-sharing) adjacency from the
+combined frontier of all occupied sites. Connectivity is guaranteed by construction: every
+occupied site is reachable from a seed through adjacency steps. The limits are transparent:
+$\kap=0$ places every new site as an independent random seed (Bernoulli site percolation);
+$\kap=1$ plants a single seed and grows a compact connected cluster (Eden growth~\cite{Eden1961}).
+Intermediate $\kap$ interpolates between a spatially uniform obstacle field and a clustered,
+compact network. Physically $\kap$ is the number of independent nucleation centers per unit
+increase in network density.
+
+% ======================================================================
+\section{Random-walk engine and observables}
+% ======================================================================
+Random walkers are initialized on unoccupied sites, modeling microrheology probe particles in
+the fluid phase. Each step attempts a move to one of the six nearest neighbors chosen uniformly;
+if the target is unoccupied the move is accepted, otherwise the walker dwells at its current site
+for a binding time $\mathrm{WT}=\lceil|\mathcal{N}(\mu_{\mathrm{WT}},\sigma_{\mathrm{WT}})|\rceil$
+steps, with $\mu_{\mathrm{WT}}=20$, $\sigma_{\mathrm{WT}}=5$. This models transient probe--network
+binding and suppresses artificial super-diffusion from immediate reflection. Periodic boundaries
+are applied through $x_n=\mathrm{mod}(x_n-1,L)+1$; the unwrapped coordinate is used for the MSD,
+\begin{equation}
+  \msd=\frac{1}{N_W}\sum_{i=1}^{N_W}\big[\Delta x_i(t)^2+\Delta y_i(t)^2+\Delta z_i(t)^2\big],
+\end{equation}
+accumulated online by parallel reduction to avoid storing $O(L_W N_W)$ trajectories
+($\sim$36~GB at production scale). Production runs use $N_W=3000$ walkers and $N_s=3$ replicates
+per condition. The anomalous exponent $\alpha$ is the log--log slope of $\msd$ over the
+intermediate window $[L_W/100,\,L_W/10]$, and the gel point is located by linear interpolation of
+$\alpha(p)$ through $0.5$,
+\begin{equation}
+  \pcp=p_i+\frac{0.5-\alpha(p_i)}{\alpha(p_{i+1})-\alpha(p_i)}(p_{i+1}-p_i),
+  \qquad \alpha(p_i)>0.5>\alpha(p_{i+1}).
+\end{equation}
+
+% ======================================================================
+\section{Winter--Chambon criterion and the GSER}
+% ======================================================================
+At the gel point $\tan\delta=G''/G'=1$, i.e.\ $\delta=45^{\circ}$~\cite{Winter1987,Chambon1987}.
+For a power-law MSD $\msd\propto t^{\alpha}$ the GSER~\cite{Mason1995,Mason2000}
+\begin{equation}
+  G^*(\omega)\approx\frac{k_BT}{\pi a\,\langle r^2(1/\omega)\rangle\,\Gamma(1+\alpha(\omega))}
+\end{equation}
+gives moduli $G',G''\propto\omega^{\alpha}$ and a frequency-independent phase angle
+\begin{equation}
+  \delta=\tfrac{\pi}{2}\alpha \quad\Longleftrightarrow\quad \delta(^{\circ})=90\,\alpha,
+\end{equation}
+so $\delta=45^{\circ}$ is exactly $\alpha=0.5$. Dimensional spectra use $T=293$~K,
+$\eta=1.2\times10^{-3}$~Pa\,s, and probe radius $a=0.243~\mu$m.
+
+% ======================================================================
+\section{Finite-size-scaling protocol and results}
+% ======================================================================
+We repeat the analysis at $L\in\{50,100,200,300,500,750\}$ for
+$\kap\in\{0,0.6,0.8,0.97,1.0\}$. Because the finite-size crossover time grows as $L^2$, the steps
+per walker are scaled as $L_W(L)=10^6(L/500)^2$, keeping the fit window within the anomalous
+regime at every size. From the size-dependent gel points $\pcp(L)$ (Table~\ref{tab:pcL}) and
+logistic transition widths $w(L)$ we estimate the correlation-length exponent three ways:
+(i) the threshold shift $\pcp(L)=\pcp(\infty)+aL^{-1/\nu}$; (ii) the width scaling
+$w(L)\sim L^{-1/\nu}$; and (iii) the data collapse of $\alpha(p,L)$ against
+$(p-\pcp(\infty))L^{1/\nu}$, scored by the residual to a master curve in $\alpha$-space (bounded,
+so axis rescaling cannot spuriously improve the score). The two smallest sizes ($L=50,100$)
+carry the strongest corrections to scaling and are excluded from all exponent fits; uncertainties
+are by jackknife over the fitted sizes.
+
+Because $\pcp(L)$ is already stationary for $L\ge200$ (Table~\ref{tab:pcL}), the shift fit
+determines $\pcp(\infty)$ robustly but has little leverage on $\nu$; the exponent is therefore
+taken from the width and collapse estimators, which do have leverage. These agree on
+\begin{equation}
+  \nueff\approx1.6, \qquad \text{independent of } \kap \text{ for } \kap\le0.8,
+\end{equation}
+as summarized in Table~\ref{tab:nu}. The value differs from the static 3D site-percolation
+exponent $\nu=0.88$ because $\pcp$ is defined dynamically (through the probe-diffusion exponent)
+rather than through a static order parameter. The strongly clustered $\kap=0.97$ condition sits
+near the Eden crossover, where the transition broadens and both estimators become noisy
+($\nu\approx2.5$--$2.9$); we do not draw exponent conclusions from it. The Eden limit $\kap=1$
+has $\pcp\to1$ and no finite-$L$ crossing within the accessible window, and is treated as a bound.
+
+\begin{table}[h]
+\centering
+\caption{Size-dependent gel point $\pcp(L)$ and its extrapolation $\pcp(\infty)$
+(shift fit, $L\ge200$).}
+\label{tab:pcL}
+\begin{tabular}{lcccc}
+\toprule
+$L$ & $\kap=0$ & $\kap=0.6$ & $\kap=0.8$ & $\kap=0.97$ \\
+\midrule
+50   & 0.734 & 0.754 & 0.773 & 0.881 \\
+100  & 0.693 & 0.720 & 0.740 & 0.840 \\
+200  & 0.684 & 0.706 & 0.725 & 0.815 \\
+300  & 0.683 & 0.705 & 0.724 & 0.812 \\
+500  & 0.681 & 0.702 & 0.721 & 0.805 \\
+750  & 0.682 & 0.703 & 0.724 & 0.804 \\
+\midrule
+$\infty$ & \textbf{0.681} & \textbf{0.702} & \textbf{0.722} & \textbf{$\approx$0.80} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\caption{Effective correlation-length exponent from data collapse and transition-width scaling
+($L\ge200$; jackknife uncertainties). The shift fit does not constrain $\nu$ (see text). The
+$\kap=0.97$ row is a noisy crossover, excluded from the reported $\nueff$.}
+\label{tab:nu}
+\begin{tabular}{lcc}
+\toprule
+$\kap$ & $\nu$ (collapse) & $\nu$ (width) \\
+\midrule
+0.0  & 1.62 & $1.77\pm0.21$ \\
+0.6  & 1.64 & $1.49\pm0.05$ \\
+0.8  & 1.67 & $1.69\pm0.03$ \\
+0.97 & 2.50 & $2.94\pm0.47$ \;(crossover) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% ======================================================================
+\section{Fixed-$L$ gel-point curve $\pcp(\kap)$}
+% ======================================================================
+At $L=500$, an 18-value $\kap$-grid resolves the full gel-point curve (Table~\ref{tab:kappa};
+mean over $N_s=3$ replicates, $\alpha=0.5$ crossing). The curve is monotonic and consistent with
+the thermodynamic-limit anchors of Table~\ref{tab:pcL}. Two regimes are separated near a $\sim1\%$
+seed fraction ($\kap\approx0.99$): a gradual rise for $\kap\lesssim0.99$ (many nuclei,
+quasi-random morphology) and a steep rise toward unity for $\kap\gtrsim0.99$ (single-cluster
+Eden morphology).
+
+\begin{table}[h]
+\centering
+\caption{Gel point $\pcp$ at $L=500$ for all 18 nucleation densities.}
+\label{tab:kappa}
+\begin{tabular}{cc@{\hspace{2em}}cc}
+\toprule
+$\kap$ & $\pcp(L{=}500)$ & $\kap$ & $\pcp(L{=}500)$ \\
+\midrule
+0.00 & 0.683 & 0.94  & 0.773 \\
+0.20 & 0.687 & 0.97  & 0.806 \\
+0.40 & 0.692 & 0.98  & 0.824 \\
+0.60 & 0.703 & 0.99  & 0.852 \\
+0.70 & 0.709 & 0.995 & 0.880 \\
+0.80 & 0.721 & 0.996 & 0.888 \\
+0.85 & 0.733 & 0.997 & 0.902 \\
+0.88 & 0.744 & 0.998 & 0.910 \\
+0.91 & 0.751 & 1.00  & $\to1$ (Eden bound) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% ======================================================================
+\section{Frequency-domain (GSER) spectra}
+% ======================================================================
+MSD curves near $\pcp$ are converted to $G'(\omega)$, $G''(\omega)$, and $\delta(\omega)$ via the
+GSER. Because the MSD is close to a single power law over the anomalous window, the spectra are
+power laws with frequency-independent $\delta=90\alpha$ over the accessible range
+$\omega\approx0.4$--$4~\mathrm{rad\,s^{-1}}$. At the gel point $G'\approx G''$ and
+$\delta\approx45^{\circ}$ for every $\kap$ (Fig.~\ref{fig:gser}); below it $\delta>45^{\circ}$
+($G''>G'$, viscous), above it $\delta<45^{\circ}$ ($G'>G''$, elastic). The current spectra are
+single-replicate per condition; replication would tighten the modulus estimates.
+
+% ======================================================================
+\section{Robustness: alternative growth rules}
+% ======================================================================
+Connectivity-preserving growth from many independently seeded nuclei per step (an
+adjacency-templated rule) also elevates the gel point; for the specific rule studied,
+$\pcp(\infty)\approx0.93$. Six-neighbor and twenty-six-neighbor adjacency give indistinguishable
+gel points, showing the shift is driven by the connectivity constraint itself, not by the precise
+adjacency rule. This confirms that morphology control of the gel point is generic to
+connectivity-preserving growth and not an artifact of the $\kap$ construction; the distinct
+$\pcp$ of this rule simply reflects a different point in growth-morphology space.
+
+% ======================================================================
+\section{Computational implementation and availability}
+% ======================================================================
+Simulations were implemented in MATLAB with \texttt{parfor} parallelization over walkers.
+Lattices are generated cumulatively as described above; the random-walk engine tracks both wrapped
+coordinates (for neighbor lookup) and unwrapped coordinates (for the MSD), and the ensemble MSD
+is accumulated online by parallel reduction. The finite-size-scaling driver runs each $\kap$
+condition at all six sizes with $L_W=10^6(L/500)^2$, $N_W=3000$, $N_s=3$, and the analysis
+extracts $\pcp(L)$, $w(L)$, and the three exponent estimates with jackknife uncertainties, fits
+restricted to $L\ge200$. Code and processed data are available from the authors on request
+[or: at \texttt{[repository link]}].
+
+% ---------------- SM figures ----------------
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.7\linewidth]{fig0_schematic_growth.png}
+  \caption{Schematic of growth morphologies at fixed occupation, from random ($\kap=0$) through
+    clustered intermediate $\kap$ to single-seed (Eden, $\kap=1$) growth, illustrating how compact
+    growth leaves a more connected void and thus a higher gel point.}
+  \label{fig:schematic}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.9\linewidth]{fig3_gser_spectra.png}
+  \caption{GSER-derived $G'(\omega)$, $G''(\omega)$ and phase angle $\delta(\omega)$ for
+    occupation densities straddling $\pcp$. At the gel point $G'\approx G''$ and
+    $\delta\approx45^{\circ}$ (the Winter--Chambon signature).}
+  \label{fig:gser}
+\end{figure}
+
+\bibliographystyle{apsrev4-2}
+\bibliography{references_enhanced}
+
+\end{document}

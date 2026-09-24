@@ -1,0 +1,26 @@
+=== ROBUST COMPREHENSIVE MSD ANALYSIS REPORT ===
+Analysis Date: 2025-08-18 19:59:43.890743
+Critical Point: p_c' = 0.6884
+Total p-values analyzed: 34
+Successful analyses: 34
+Success rate: 100.0%
+
+SUMMARY STATISTICS:
+  Average α: 6.714 ± 42.192
+  Average τ_cr: 2.03e+05
+  Average α error: 0.063
+
+REGIME BREAKDOWN:
+  LIQUID: 19 p-values
+  CRITICAL: 14 p-values
+  SOLID: 1 p-values
+
+KEY P-VALUE RESULTS:
+p-value    Regime     τ_cr         α         Error
+-------------------------------------------------------
+0.0000   LIQUID     2.60e+01     0.996    0.000    ✓
+0.3116   LIQUID     2.60e+01     0.475    0.048    ✓
+0.6884   CRITICAL   7.20e+05     -66.475  0.097    ✓
+0.7425   SOLID      2.60e+05     84.930   0.063    ✓
+
+============================================================

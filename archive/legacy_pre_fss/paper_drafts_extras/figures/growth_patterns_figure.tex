@@ -1,0 +1,57 @@
+% Figure: Growth Patterns for Different Lattice Generation Methods
+% This file contains the LaTeX code for Figure 1 showing 2D growth patterns
+
+\begin{figure}[htbp]
+\centering
+\begin{subfigure}[b]{0.24\textwidth}
+\centering
+\includegraphics[width=\textwidth]{growth_patterns_random.png}
+\caption{Random Percolation}
+\label{fig:growth_random}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.24\textwidth}
+\centering
+\includegraphics[width=\textwidth]{growth_patterns_6N.png}
+\caption{6N Templating}
+\label{fig:growth_6N}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.24\textwidth}
+\centering
+\includegraphics[width=\textwidth]{growth_patterns_26N.png}
+\caption{26N Templating}
+\label{fig:growth_26N}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.24\textwidth}
+\centering
+\includegraphics[width=\textwidth]{growth_patterns_density.png}
+\caption{Density Increment}
+\label{fig:growth_density}
+\end{subfigure}
+
+\caption{Growth patterns for different lattice generation methods. Each panel shows 2D slices of 3D lattices at occupation probabilities $p = 0.1, 0.3, 0.5, 0.7$ (top to bottom). (a) Random Percolation: Disordered, random distribution of occupied sites (black) with no adjacency constraints. (b) 6N Templating: Structured growth with face-adjacent connectivity, showing dendritic patterns. (c) 26N Templating: Dense, highly connected growth with face, edge, and corner connectivity, resulting in compact clusters. (d) Density Increment: Random addition without adjacency constraints, similar to random percolation but with different growth dynamics. The distinct growth patterns demonstrate the fundamental differences in local structure that lead to different universality classes and tunable gel-point positioning. Scale bar: 50 lattice units.}
+\label{fig:growth_patterns}
+\end{figure}
+
+% Additional figure showing the neighbor connectivity rules
+\begin{figure}[htbp]
+\centering
+\begin{subfigure}[b]{0.45\textwidth}
+\centering
+\includegraphics[width=\textwidth]{neighbor_connectivity_6N.png}
+\caption{6N Connectivity}
+\label{fig:connectivity_6N}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.45\textwidth}
+\centering
+\includegraphics[width=\textwidth]{neighbor_connectivity_26N.png}
+\caption{26N Connectivity}
+\label{fig:connectivity_26N}
+\end{subfigure}
+
+\caption{Neighbor connectivity rules for templating methods. (a) 6N connectivity: Face-adjacent neighbors only (6 neighbors total). (b) 26N connectivity: Face, edge, and corner neighbors (26 neighbors total). The connectivity rules determine which sites are eligible for occupation during the templated growth process, directly influencing the resulting cluster structure and universality class.}
+\label{fig:connectivity_rules}
+\end{figure}

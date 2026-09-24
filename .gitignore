@@ -1,0 +1,46 @@
+# Large data files and directories
+matlab/Clusters1/
+matlab/Clusters/
+ensemble_simulations/
+lattices_L100_seq/
+enhanced_output/
+enhanced_output_fine/
+test_output/
+paper_simulations/
+paper_figures/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+
+# Virtual environment
+venv/
+env/
+ENV/
+
+# MATLAB cache
+*.asv
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Log files
+*.log
+
+# Large result files
+*.csv
+*.png
+*.fig
+*.mat
+
+# Letter figures must travel with the manuscript (Overleaf compiles from the repo).
+!paper_drafts/figures_v2/*.png
+
+# Temporary files
+*.tmp
+*.temp

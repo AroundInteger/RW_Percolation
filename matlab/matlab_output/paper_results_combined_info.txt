@@ -1,0 +1,12 @@
+Combined results would include:
+- paper_results_combined.mat: All data in one MATLAB file
+- paper_results_combined.csv: All data in CSV format
+- paper_msd_comparison.png: Publication-ready plot
+- paper_msd_comparison.fig: MATLAB figure file
+
+Plot would show:
+- 4 MSD curves on log-log scale
+- Colors: blue (p=0), orange (p=0.3116), red (p=0.6884), purple (p=0.75)
+- X-axis: Time Step τ (1 to 1000)
+- Y-axis: Mean Squared Displacement ⟨Δr²(τ)⟩
+- Title: "3D Percolation Paper Simulations: 1M Steps, 1000 Walkers"
