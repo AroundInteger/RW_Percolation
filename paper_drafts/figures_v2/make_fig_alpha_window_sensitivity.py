@@ -32,7 +32,8 @@ for r in rows:
     kap = float(r.get('kappa', 'nan'))
     if pc != pc:
         continue
-    by_cond.setdefault(cond, dict(kappa=kap, windows={}))[win] = pc
+    entry = by_cond.setdefault(cond, dict(kappa=kap, windows={}))
+    entry['windows'][win] = pc
 
 if not by_cond:
     raise SystemExit('No valid rows in alpha_window_summary.csv')
@@ -48,7 +49,12 @@ for i, cond in enumerate(conds):
     offset = (i - (len(conds)-1)/2) * width
     col = S.kappa_color(d['kappa'])
     ax.bar(xpos + offset, vals, width=width, color=col, edgecolor='white', linewidth=0.6,
-           label=r'$\kappa=%.2g$' % d['kappa'])
+           label=r'$\kappa=%.3g$' % d['kappa'])
+
+all_vals = [v for d in by_cond.values() for v in d['windows'].values() if v == v]
+lo, hi = min(all_vals), max(all_vals)
+pad = max(0.01, 0.08 * (hi - lo))
+ax.set_ylim(lo - pad, hi + pad)
 
 ax.set_xticks(xpos)
 ax.set_xticklabels([WINDOW_LABEL[w] for w in WINDOW_ORDER], fontsize=10)
