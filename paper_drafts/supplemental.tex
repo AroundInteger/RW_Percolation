@@ -1,6 +1,6 @@
 % ======================================================================
 %  Supplemental Material
-%  Nucleation density programs the viscoelastic gel point of a percolation network
+%  Nucleation density programs the diffusion gel point on a percolation network
 %  REVTeX 4.2
 % ======================================================================
 \documentclass[aps,prl,onecolumn,superscriptaddress,nofootinbib,longbibliography]{revtex4-2}
@@ -27,7 +27,7 @@
 
 \begin{document}
 
-\title{Supplemental Material:\\ Nucleation density programs the viscoelastic gel point of a percolation network}
+\title{Supplemental Material:\\ Nucleation density programs the diffusion gel point on a percolation network}
 \author{A.~Author}
 \author{B.~Author}
 \author{C.~Author}
@@ -36,11 +36,13 @@
 \date{\today}
 \maketitle
 
-This Supplemental Material gives the lattice and random-walk model, the nucleation-density
-growth algorithm, the geometric void-spanning check, the fixed-$L$ gel-point curve, the
-frequency-domain (GSER) spectra, and the code notes. The finite-size protocol and the
-walk-dimension argument are in the End Matter of the Letter. Equation, figure, and table
-numbers are prefixed ``S''.
+This Supplemental Material gives the lattice and random-walk model (6-neighbour adjacency),
+the nucleation-density growth algorithm, the geometric void-spanning check, the fixed-$L$
+gel-point curve, the frequency-domain (GSER) spectra interpreted as an operational
+microrheology layer, and the code notes. The finite-size protocol and the walk-dimension
+argument are in the End Matter of the Letter. Alternative connectivity (e.g.\ 26-neighbour)
+is indistinguishable at fixed $\kap$ within the present $p$-grid. Equation, figure, and
+table numbers are prefixed ``S''.
 
 % ======================================================================
 \section{Lattice model and the nucleation-density ($\kap$) growth algorithm}
@@ -136,11 +138,17 @@ regime.
 
 \section{Fixed-$L$ gel-point curve $\pcp(\kap)$}
 % ======================================================================
-At $L=500$, an 18-value $\kap$-grid, a separate fixed-$L$ sweep, resolves the full gel-point curve (Table~\ref{tab:kappa};
-mean over $N_s=3$ replicates, $\alpha=0.5$ crossing). At $\kap=0$ this sweep gives $0.683$, which agrees with the $L=500$ finite-size value $0.681$ in the End Matter of the Letter to $0.002$. The curve is monotonic and consistent with those thermodynamic-limit anchors. Two regimes are separated near a $\sim1\%$
-seed fraction ($\kap\approx0.99$): a gradual rise for $\kap\lesssim0.99$ (many nuclei,
-quasi-random morphology) and a steep rise toward unity for $\kap\gtrsim0.99$ (single-cluster
-Eden morphology).
+At $L=500$, an 18-value $\kap$-grid on a shared $p$-grid, in a separate fixed-$L$ sweep,
+resolves the full gel-point curve (Table~\ref{tab:kappa}; mean over $N_s=3$ replicates,
+$\alpha=0.5$ crossing). At $\kap=0$ this sweep gives $0.683$, which agrees with the
+$L=500$ finite-size value $0.681$ in the End Matter of the Letter to $0.002$. At
+$\kap=0.99$ and $0.995$ the fixed-$L$ values ($0.852$, $0.880$) sit $\sim0.007$--$0.008$
+below the FSS extrapolations in End Matter Table~\ref{tab:pcLcross} ($0.857$, $0.866$),
+reflecting the shared versus condition-specific $p$-grids. The curve is monotonic and
+consistent with those thermodynamic-limit anchors. Two regimes are separated near a
+$\sim1\%$ seed fraction ($\kap\approx0.99$): a gradual rise for $\kap\lesssim0.99$ (many
+nuclei, quasi-random morphology) and a steep rise toward unity for $\kap\gtrsim0.99$
+(single-cluster Eden morphology).
 
 \begin{table}[h]
 \centering

@@ -19,10 +19,12 @@ function analyze_FSS()
 %
 % Outputs (matlab/FSS_study/):
 %   fss_pcL_table.csv    p_c'(L), width w(L) per (condition,L)  [ALL sizes]
-%   fss_nu_summary.csv   pc_inf, nu_shift(+CI), nu_width(+CI), nu_collapse,
-%                        and the fixed-nu (0.88 / 1.50) pc_inf & R^2
+%   fss_nu_summary.csv   pc_inf, nu_shift(+CI), nu_width(+CI), nu_collapse(+CI),
+%                        collapse_sse, and the fixed-nu (0.88 / 1.50) pc_inf & R^2
+%   fss_nu_R2_curve.csv  full R^2(nu) grid for p_c'(L) shift fits; rows at
+%                        nu = 0.88 and 1.50 include pc_inf for manuscript tables
 %   fss_pcL_fits.png     p_c'(L) vs L^(-1/nu_shift) with fits (fit sizes filled)
-%   fss_nu_of_kappa.png  nu(kappa): shift & width estimators with jackknife bars
+%   fss_nu_of_kappa.png  nu(kappa): shift, width & collapse estimators with bars
 %
 % Usage:  >> analyze_FSS
 %
@@ -72,7 +74,9 @@ writetable(R, fullfile(root,'fss_pcL_table.csv'));
 % ---- per-condition FSS fits (large L only) ----
 summ = struct('condition',{},'kappa',{},'nLfit',{},'pc_inf',{},'nu_shift',{}, ...
     'nu_shift_ci',{},'nu_width',{},'nu_width_ci',{},'nu_collapse',{}, ...
+    'nu_collapse_ci',{},'collapse_sse',{}, ...
     'pc_inf_p88',{},'R2_p88',{},'pc_inf_150',{},'R2_150',{},'note',{});
+r2curve = struct('condition',{},'kappa',{},'nu',{},'R2',{},'pc_inf',{},'highlight',{});
 figure('Name','p_c''(L) fits','Position',[80 80 920 640]); hold on;
 cmap = lines(numel(conds));
 
@@ -108,17 +112,25 @@ for ci = 1:numel(conds)
 
     scf = sc_safe(cond);
     if isfield(curves, scf)
-        nu_collapse = collapse_master(curves.(scf), pc_inf, NU_GRID, LMIN_FIT);
+        [nu_collapse, collapse_sse] = collapse_master(curves.(scf), pc_inf, NU_GRID, LMIN_FIT);
+        nu_collapse_ci = jackknife_collapse(curves.(scf), pc_inf, NU_GRID, LMIN_FIT);
     else
-        nu_collapse = NaN;
+        nu_collapse = NaN; nu_collapse_ci = NaN; collapse_sse = NaN;
     end
 
     [pc88,R288] = fixed_nu_fit(L, pc, NU_FIXED(1));
     [pc15,R215] = fixed_nu_fit(L, pc, NU_FIXED(2));
 
+    for nut = NU_GRID
+        [pcn,R2n] = fixed_nu_fit(L, pc, nut);
+        r2curve(end+1) = struct('condition',cond,'kappa',kap,'nu',nut, ...
+            'R2',R2n,'pc_inf',pcn,'highlight',double(any(abs(nut-NU_FIXED)<1e-9))); %#ok<AGROW>
+    end
+
     summ(end+1) = struct('condition',cond,'kappa',kap,'nLfit',height(rFit), ...
         'pc_inf',pc_inf,'nu_shift',nu_shift,'nu_shift_ci',nu_shift_ci, ...
         'nu_width',nu_width,'nu_width_ci',nu_width_ci,'nu_collapse',nu_collapse, ...
+        'nu_collapse_ci',nu_collapse_ci,'collapse_sse',collapse_sse, ...
         'pc_inf_p88',pc88,'R2_p88',R288,'pc_inf_150',pc15,'R2_150',R215, ...
         'note',note); %#ok<AGROW>
 
@@ -136,6 +148,8 @@ saveas(gcf, fullfile(root,'fss_pcL_fits.png'));
 
 S = struct2table(summ);
 writetable(S, fullfile(root,'fss_nu_summary.csv'));
+R2C = struct2table(r2curve);
+writetable(R2C, fullfile(root,'fss_nu_R2_curve.csv'));
 
 kl = S(~isnan(S.kappa) & S.kappa>=0 & S.kappa<1 & startsWith(S.condition,'k') ...
        & isfinite(S.nu_shift), :);
@@ -146,6 +160,11 @@ if height(kl) >= 2
         'DisplayName','\nu_{shift}');
     errorbar(kl.kappa+0.004, kl.nu_width, kl.nu_width_ci, 's--', 'LineWidth',1.5, ...
         'DisplayName','\nu_{width}');
+    okc = isfinite(kl.nu_collapse) & isfinite(kl.nu_collapse_ci);
+    if any(okc)
+        errorbar(kl.kappa(okc), kl.nu_collapse(okc), kl.nu_collapse_ci(okc), ...
+            'd-', 'LineWidth',1.5, 'DisplayName','\nu_{collapse}');
+    end
     yline(0.88,'--','\nu = 0.88 (3D percolation)','LabelHorizontalAlignment','left');
     xlabel('\kappa (nucleation-density parameter)'); ylabel('\nu');
     ylim([0 2.6]); legend('Location','best');
@@ -201,13 +220,17 @@ function [pc_inf,R2] = fixed_nu_fit(L, pc, nu)
     R2 = 1 - sum(res.^2)/max(sum((pc(:)-mean(pc(:))).^2), eps);
 end
 
-function nu = collapse_master(Lstruct, pc_inf, NU_GRID, LMIN)
-    nu=NaN; if ~isfinite(pc_inf), return; end
+function [nu, sse_best] = collapse_master(Lstruct, pc_inf, NU_GRID, LMIN, Lskip)
+% Lskip (optional): L values to exclude from the collapse fit (jackknife).
+    nu=NaN; sse_best=NaN;
+    if ~isfinite(pc_inf), return; end
+    if nargin < 5, Lskip = []; end
     fn=fieldnames(Lstruct); best=inf;
     for nut=NU_GRID
         X=[]; A=[];
         for i=1:numel(fn)
             L=sscanf(fn{i},'L%d'); if L<LMIN, continue; end
+            if ismember(L, Lskip), continue; end
             pa=Lstruct.(fn{i}); p=pa(:,1); a=pa(:,2);
             m = p>0.5 & abs(p-pc_inf)<=0.10 & isfinite(a);
             X=[X;(p(m)-pc_inf)*L^(1/nut)]; A=[A;a(m)]; %#ok<AGROW>
@@ -222,8 +245,24 @@ function nu = collapse_master(Lstruct, pc_inf, NU_GRID, LMIN)
         catch
             sse=inf;
         end
-        if sse<best, best=sse; nu=nut; end
+        if sse<best, best=sse; nu=nut; sse_best=sse; end
     end
+end
+
+function ci = jackknife_collapse(Lstruct, pc_inf, NU_GRID, LMIN)
+    fn=fieldnames(Lstruct);
+    Lfit=[];
+    for i=1:numel(fn)
+        L=sscanf(fn{i},'L%d');
+        if L>=LMIN, Lfit(end+1)=L; end %#ok<AGROW>
+    end
+    n=numel(Lfit);
+    if n<3 || ~isfinite(pc_inf), ci=NaN; return; end
+    est=zeros(n,1);
+    for i=1:n
+        est(i)=collapse_master(Lstruct, pc_inf, NU_GRID, LMIN, Lfit(i));
+    end
+    ci = sqrt((n-1)/n * sum((est-mean(est)).^2));
 end
 
 function [pc, plo, phi] = cross_interp(p, a, thr)
@@ -254,8 +293,8 @@ end
 function r = blank_row(cond,kap,nLfit,note)
     r = struct('condition',cond,'kappa',kap,'nLfit',nLfit,'pc_inf',NaN, ...
         'nu_shift',NaN,'nu_shift_ci',NaN,'nu_width',NaN,'nu_width_ci',NaN, ...
-        'nu_collapse',NaN,'pc_inf_p88',NaN,'R2_p88',NaN,'pc_inf_150',NaN, ...
-        'R2_150',NaN,'note',note);
+        'nu_collapse',NaN,'nu_collapse_ci',NaN,'collapse_sse',NaN, ...
+        'pc_inf_p88',NaN,'R2_p88',NaN,'pc_inf_150',NaN,'R2_150',NaN,'note',note);
 end
 
 function out = ternary(cond,a,b)
