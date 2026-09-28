@@ -64,7 +64,7 @@ def style_alpha_panel(ax, lo, hi, title):
 
 def fss_pc_inf_kappa0(root):
     """FSS extrapolated gel point for annotation (letter End Matter)."""
-    path = os.path.join(root, 'matlab/FSS_study/fss_pcL_table.csv')
+    path = os.path.join(root, 'matlab/FSS_study/fss_nu_summary.csv')
     if not os.path.isfile(path):
         return np.nan
     for r in csv.DictReader(open(path)):
