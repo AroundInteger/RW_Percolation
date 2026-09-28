@@ -13,17 +13,21 @@ The static 3D percolation value nu = 0.88 is drawn for reference.
 
 Usage:
     python3 make_fig4b.py [path/to/fss_nu_summary.csv] [out.png]
-Defaults: ../../matlab/FSS_study/fss_nu_summary.csv  ->  fig4b_nu_vs_kappa.png
+Defaults: matlab/FSS_study/fss_nu_summary.csv  ->  paper_drafts/figures_v2/fig4b_nu_vs_kappa.png
 """
-import sys, csv
+import sys, csv, os
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
 from matplotlib.patches import Patch
 
-csv_path = sys.argv[1] if len(sys.argv) > 1 else '../../matlab/FSS_study/fss_nu_summary.csv'
-out_path = sys.argv[2] if len(sys.argv) > 2 else 'fig4b_nu_vs_kappa.png'
+HERE = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
+_default_csv = os.path.join(ROOT, 'matlab/FSS_study/fss_nu_summary.csv')
+_default_out = os.path.join(HERE, 'fig4b_nu_vs_kappa.png')
+csv_path = sys.argv[1] if len(sys.argv) > 1 else _default_csv
+out_path = sys.argv[2] if len(sys.argv) > 2 else _default_out
 
 CROSSOVER_KAPPA = 0.9
 BAND_KAPPA_MAX  = 0.8
