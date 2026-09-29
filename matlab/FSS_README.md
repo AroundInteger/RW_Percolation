@@ -50,7 +50,8 @@ picks up where it left off.
 - `fss_pcL_fits.png` — pc′(L) vs L^(−1/ν) with fits
 - `fss_nu_of_kappa.png` — ν(κ): shift, width & collapse estimators with jackknife bars
 - `alpha_window_pcL.csv`, `alpha_window_summary.csv` — M4 window sensitivity (from `alpha_window_sensitivity`)
-- `void_geom_fss_kappa0.csv` — geometric pc′_geom(L) at κ = 0 (from `void_geom_FSS_kappa0`)
+- `void_geom_fss_kappa0.csv` — per-seed geometric pc′_geom(L) at κ = 0 (long: L, seed, pc_geom_z)
+- `void_geom_fss_kappa0_summary.csv` — mean ± std of pc′_geom(L) per L (from `void_geom_FSS_kappa0`)
 
 ## Reading the result
 

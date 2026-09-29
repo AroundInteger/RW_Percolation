@@ -13,7 +13,7 @@ All figures for the reframed manuscript, gathered here. "Role" = where it appear
 | `fig4a_fss_pcL.png` | §3.3 / App. B — FSS pc′(L) vs L^(−1/ν) with per-κ ν | `make_fig4a.py` ← `fss_pcL_table.csv` + `fss_nu_summary.csv` | **regenerate** |
 | `fig4b_nu_vs_kappa.png` | §3.3 — ν(κ): collapse + width, κ=0.97 crossover, 0.88 ref | `make_fig4b.py` ← `fss_nu_summary.csv` | **regenerate** |
 | `fig_collapse_kappa035.png` | §3.3 / supplement — data collapse at κ = 0, 0.6, 0.8 | `make_fig_collapse.py` | **regenerate** |
-| `fig_threshold_kappa0.png` | §3.1 / B1 — joint p′_MR(L), p′_geom(L), 1−p_c at κ=0 | `make_fig_threshold_kappa0.py` | **regenerate** |
+| `fig_threshold_kappa0.png` | §3.1 / B1 — joint p′_MR(L), p′_geom(L), 1−p_c at κ=0 with ±1σ seed error bars | `make_fig_threshold_kappa0.py` ← `fss_alpha_table.csv` + `void_geom_fss_kappa0.csv` | **regenerate** |
 | `fig_alpha_window_sensitivity.png` | supplement M4 — p′_c(∞) vs MSD fit window | `make_fig_alpha_window_sensitivity.py` | **regenerate** |
 | `fig_dyn_vs_geom.png` | §3.2 — dynamical vs geometric pc′(κ) | `make_fig_dyn_vs_geom.py` | **regenerate** (re-seed void run) |
 
