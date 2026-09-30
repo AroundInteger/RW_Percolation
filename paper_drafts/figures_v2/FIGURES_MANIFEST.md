@@ -6,7 +6,8 @@ All figures for the reframed manuscript, gathered here. "Role" = where it appear
 | File | Role in v2 | Source | Status |
 |------|-----------|--------|--------|
 | `fig0_schematic_growth.png` | (optional) growth-morphology schematic | figures/fig_schematic_growth.png | **regenerate** — simplify to random → κ family → Eden; drop the 6N/26N "class" emphasis |
-| `fig1_random_alpha_vs_p.png` | §3.1 — α(p) for the random (κ=0) network | `make_fig1.py` → FSS `k0p00` L=500 (fallback: legacy Clusters CSV) | **regenerate** |
+| `fig1_random_alpha_vs_p.png` | §3.1 — α(p) for the random (κ=0) network; **letter default**: ±1σ shaded band over $N_s=3$ seeds + horizontal gel-point seed uncertainty | `make_fig1.py` ← `matlab/Clusters_kappa/L500/kappa_study_alpha_table.csv` | **regenerate** |
+| `fig1_random_alpha_vs_p_errbars.png` | §3.1 — same data, explicit vertical error bars at each $p$ (comparison / supplement) | `make_fig1.py` (errbars mode) | **regenerate** |
 | `fig2a_kappa_alpha_vs_p.png` | §3.2 — α(p,κ) across the nucleation-density family | figures/fig1_alpha_vs_p.png | final |
 | `fig2b_gelpoint_vs_kappa.png` | §3.2 — pc′(κ) tunable gel-point curve (L=500) | figures/fig2_gel_point_tunable.png | final |
 | `fig3_gser_spectra.png` | §3.4 — GSER G′,G″,δ spectra straddling pc′ | figures/fig5_gser.png | final (single-replicate caveat noted in text) |
@@ -20,7 +21,7 @@ All figures for the reframed manuscript, gathered here. "Role" = where it appear
 ## Regeneration commands (from repo root, after CSVs exist)
 
 ```bash
-python3 paper_drafts/figures_v2/make_fig1.py
+python3 paper_drafts/figures_v2/make_fig1.py   # writes band + errbars PNGs
 python3 paper_drafts/figures_v2/make_fig4a.py
 python3 paper_drafts/figures_v2/make_fig4b.py
 python3 paper_drafts/figures_v2/make_fig_collapse.py
