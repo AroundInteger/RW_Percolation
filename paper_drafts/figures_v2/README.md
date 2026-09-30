@@ -1,70 +1,97 @@
-# Production figures for the PRL letter
+# Manuscript figures (`figures_v2/`)
 
-This directory holds **publication PNGs** and the **Python drivers** that draw them from simulation tables. The manuscript sources are `paper_drafts/prl_letter.tex`, `paper_drafts/supplemental.tex`, and `paper_drafts/prl_combined.tex`. A compact file index with draft-section mapping is in [`FIGURES_MANIFEST.md`](FIGURES_MANIFEST.md).
+Publication PNGs and Python redraw scripts for the PRL letter and supplement. The LaTeX sources include these files directly:
 
-Shared styling lives in `rw_figstyle.py`. **κ = 0** α(p) panels share logic in **`kappa_alpha_common.py`** (CSV load, per-seed grids, gel-point crossing, band vs error-bar drawing, FSS annotation helper).
+- `paper_drafts/prl_letter.tex`
+- `paper_drafts/supplemental.tex`
+- `paper_drafts/prl_combined.tex`
 
-## What belongs here
+Shared styling lives in `rw_figstyle.py`. A quick inventory of filenames and manuscript roles is in `FIGURES_MANIFEST.md`.
 
-- **Committed:** PNG outputs and `make_*.py` scripts.
-- **Not committed:** all `*.csv` inputs (repo-wide `*.csv` is gitignored). Regenerate figures on a machine that has run the MATLAB pipeline or restored production tables locally.
+## Phase A (science fixes branch)
 
-## Input data paths (gitignored)
+Branch `cursor/phase-a-science-fixes` carries the Phase A figure refresh: per-seed uncertainty on the random-network α(p) panel, a dual fig1 export (band vs error bars), seed error bars on the κ = 0 threshold reconciliation plot, and collapse/threshold PNGs regenerated from local production CSVs. **Committed PNGs reflect runs on the author machine**; the gitignored CSV and `.mat` inputs are not in the repo. Clone the branch for Overleaf or review without rerunning MATLAB.
 
-| Figure script | Primary CSV inputs (from repo root) |
-|---------------|-------------------------------------|
-| `make_fig1.py` | `matlab/Clusters_kappa/L500/kappa_study_alpha_table.csv` |
-| `make_fig2.py`, `make_fig_dyn_vs_geom.py`, `make_fig3.py` | same κ-study table (L = 500 family) |
-| `make_fig4a.py`, `make_fig4b.py`, `make_fig_collapse.py` | `matlab/FSS_study/fss_nu_summary.csv`, `fss_pcL_table.csv`, `fss_alpha_table.csv` |
-| `make_fig_threshold_kappa0.py` | `matlab/FSS_study/fss_alpha_table.csv`, `fss_pcL_table.csv`, `void_geom_fss_kappa0.csv` (or `void_geom_fss_kappa0_summary.csv`) |
-| `make_fig_alpha_window_sensitivity.py` | `matlab/FSS_study/alpha_window_summary.csv` |
+## Data dependencies (local, gitignored)
 
-MATLAB campaign and analysis: see [`matlab/FSS_README.md`](../../matlab/FSS_README.md). Typical order: `RW3D_FSS_study` → `analyze_FSS`, then Phase A follow-ups `alpha_window_sensitivity`, `void_geom_FSS_kappa0`, and (for κ tunability at L = 500) `void_percolation_threshold`. The L = 500 κ-mixing α table comes from the production κ study (`RW3D_kappa_mixing_study.m` / `matlab/Clusters_kappa/L500/`).
+Root `.gitignore` excludes `*.csv` and most `*.png`; only `paper_drafts/figures_v2/*.png` is whitelisted so figures travel with the manuscript.
 
-## Regeneration (from repo root)
+| Path | Produced by | Used for |
+|------|-------------|----------|
+| `matlab/Clusters_kappa/L500/kappa_study_alpha_table.csv` | κ mixing study at L = 500 | `make_fig1.py`, `make_fig2.py`, `make_fig3.py`, `make_fig_dyn_vs_geom.py` |
+| `matlab/FSS_study/fss_alpha_table.csv` | `analyze_FSS.m` after `RW3D_FSS_study.m` | Threshold MR curve, collapse, per-seed pc′(L) |
+| `matlab/FSS_study/fss_pcL_table.csv` | `analyze_FSS.m` | `make_fig4a.py`, threshold fallback |
+| `matlab/FSS_study/fss_nu_summary.csv` | `analyze_FSS.m` | `make_fig4a.py`, `make_fig4b.py`, `make_fig_collapse.py`, fig1 FSS annotation |
+| `matlab/FSS_study/void_geom_fss_kappa0.csv` | `void_geom_FSS_kappa0.m` | `make_fig_threshold_kappa0.py` (preferred: long format with seed column) |
+| `matlab/FSS_study/void_geom_fss_kappa0_summary.csv` | `void_geom_FSS_kappa0.m` | threshold plot fallback |
+| `matlab/FSS_study/alpha_window_summary.csv` | `alpha_window_sensitivity.m` | `make_fig_alpha_window_sensitivity.py` |
+| `matlab/void_pc_geom.csv` | `void_percolation_threshold.m` | `make_fig_dyn_vs_geom.py` |
 
-Requires Python 3 with `numpy` and `matplotlib`. CSVs must exist at the paths above.
+MATLAB run order and FSS outputs are documented in `matlab/FSS_README.md`. Production FSS: `RW3D_FSS_study` → `analyze_FSS`; Phase A follow-ups: `alpha_window_sensitivity`, `void_geom_FSS_kappa0`, `void_percolation_threshold`.
+
+## Regenerating figures
+
+From the repository root, with CSVs in place and a Python 3 environment that has `numpy` and `matplotlib`:
 
 ```bash
+# Phase A core (order independent among these)
 python3 paper_drafts/figures_v2/make_fig1.py
 python3 paper_drafts/figures_v2/make_fig_threshold_kappa0.py
 python3 paper_drafts/figures_v2/make_fig_collapse.py
+
+# Remaining v2 scripts (depend on the same FSS / κ tables)
+python3 paper_drafts/figures_v2/make_fig2.py
 python3 paper_drafts/figures_v2/make_fig4a.py
 python3 paper_drafts/figures_v2/make_fig4b.py
 python3 paper_drafts/figures_v2/make_fig_alpha_window_sensitivity.py
 python3 paper_drafts/figures_v2/make_fig_dyn_vs_geom.py
-python3 paper_drafts/figures_v2/make_fig2.py
+python3 paper_drafts/figures_v2/make_fig3.py   # needs GSER .mat under matlab/Clusters1/
 ```
 
-`make_fig1.py` writes **two** PNGs in one run (see below). Other scripts write a single file each, named in the script header.
+There is no single `make all` target; run the scripts above as inputs become available.
 
-## Fig 1: band (letter default) vs error bars
+## Shared module: `kappa_alpha_common.py`
 
-`make_fig1.py` produces:
+`kappa_alpha_common.py` loads `kappa_study_alpha_table.csv`, builds the α(p) grid per κ, and implements drawing helpers used by:
 
-| Output | Use |
-|--------|-----|
-| `fig1_random_alpha_vs_p.png` | **Letter default:** κ = 0 α(p) with ±1σ **shaded band** over N_s = 3 lattice seeds at each p, plus **horizontal** error bar on p′_c at α = 0.5 (seed-to-seed gel-point spread). |
-| `fig1_random_alpha_vs_p_errbars.png` | Same data with **vertical** ±1σ error bars at each p (subsampled on the full-range panel for clarity). For comparison or supplement. |
+- **`make_fig1.py`** — κ = 0 only, with seed-resolved gel-point markers
+- **`make_fig2.py`** — full κ family (`draw_kappa_curve` uses mean ± 1σ bands and mean-curve gel markers on fig2a)
 
-Both variants use `kappa_alpha_common.draw_kappa_curve_band` vs `draw_kappa_curve_errbars`, and annotate FSS p′_c(∞) from `fss_nu_summary.csv` (`condition = k0p00`) when that file is present. Bernoulli reference 1 − p_c = 0.6884 is marked as a dotted vertical line.
+Key behaviours for fig1:
 
-**Gel-point seed statistics at κ = 0 (L = 500, α = 0.5 crossing per seed):** mean p′_c = **0.682514 ± 0.001382** (N_s = 3 seeds). This is the horizontal uncertainty shown on the band figure, not the vertical α band at fixed p.
+- **α curves:** mean over seeds at each p, with ±1σ across seeds (`N_s = 3` lattices).
+- **Gel point at α = 0.5:** per-seed crossing `p′_c`, then a marker at the seed mean with **horizontal** error bar = sample standard deviation across seeds (`draw_gel_point_seed_uncertainty`).
+- **FSS annotation:** `fss_pc_inf_kappa0()` reads `p_c'(\infty)` for condition `k0p00` from `fss_nu_summary.csv`.
 
-## Threshold panel: per-seed error bars
+### Fig1 dual outputs
 
-`fig_threshold_kappa0.png` (`make_fig_threshold_kappa0.py`) plots dynamical p′_MR(L) and geometric p′_geom(L) at κ = 0 versus system size, with **±1σ error bars over seeds** at each L, alongside the Bernoulli reference 1 − p_c. Dynamical thresholds are recomputed from per-seed α(p, L) in `fss_alpha_table.csv` when a seed column is present; geometric points come from `void_geom_fss_kappa0.csv` (long format) or its summary file.
+`make_fig1.py` writes two PNGs from the same data:
 
-## Phase A (`cursor/phase-a-science-fixes`)
+| File | Mode | Letter use |
+|------|------|------------|
+| `fig1_random_alpha_vs_p.png` | `band` — shaded ±1σ band, no vertical error bars at every p | **Default in the letter** |
+| `fig1_random_alpha_vs_p_errbars.png` | `errbars` — explicit vertical error bars (subsampled on the full-range panel) | Comparison / supplement |
 
-This branch batch aligns **Phase A** science fixes with regenerated PNGs:
+Both panels show Bernoulli `1 − p_c = 0.6884`, L = 500 gel-point annotation, and FSS `p_c'(\infty)` when the nu summary CSV is present.
 
-- Shared κ = 0 α(p) drawing and gel-point uncertainty via `kappa_alpha_common.py`.
-- Fig 1 band + errbars variants; threshold panel with explicit seed error bars.
-- Tracked updates to `fig1_random_alpha_vs_p.png`, `fig1_random_alpha_vs_p_errbars.png`, `fig_threshold_kappa0.png`, and `fig_collapse_kappa035.png` where CSV-backed regeneration was run locally.
+**Last production gel-point spread (κ = 0, α = 0.5 crossings, three seeds):**  
+p′_c = 0.680932, 0.683119, 0.683490 → **mean 0.682514 ± 0.001382** (sample σ across seeds).
 
-Manuscript `.tex` edits and full FSS CSV restoration may land in separate commits; **do not** commit gitignored CSVs when pushing figure-only updates.
+## Threshold figure (`fig_threshold_kappa0.png`)
 
-## Current claims (figure context)
+`make_fig_threshold_kappa0.py` plots joint finite-size thresholds at κ = 0:
 
-See root [`LEDGER.md`](../../LEDGER.md) and [`paper_drafts/PAPER_WRITING_RULES.md`](../PAPER_WRITING_RULES.md). In brief: dynamical gel point matches void spanning for κ ≲ 0.8; at κ = 0, p′_c(∞) ≈ 0.681; α is the log–log MSD slope on [L_W/100, L_W/10], not a changepoint time.
+- **Dynamical** p′_MR(L): α = 0.5 crossing per seed from `fss_alpha_table.csv`, then mean ± 1σ over seeds at each L (matches `analyze_FSS.m` interpolation logic).
+- **Geometric** p′_geom(L): void spanning from `void_geom_fss_kappa0.m` outputs (`void_geom_fss_kappa0.csv` or summary CSV).
+- Horizontal reference: Bernoulli void threshold `1 − p_c = 0.6884`.
+
+Error bars are **seed-to-seed** (N = 3), labelled on the figure. Requires FSS α table plus geometric FSS run; see `matlab/void_geom_FSS_kappa0.m`.
+
+## Collapse and other regenerated PNGs
+
+- `fig_collapse_kappa035.png` — `make_fig_collapse.py` (κ ∈ {0, 0.6, 0.8}, uses `fss_nu_summary.csv` + `fss_alpha_table.csv`).
+- Other tracked PNGs in this folder may be copied from legacy `figures/` or produced by the corresponding `make_fig*.py` script; see `FIGURES_MANIFEST.md` for status.
+
+## What not to commit
+
+Do not add gitignored simulation products (`*.csv`, `matlab/FSS_study/*.mat`, ensemble lattices, etc.) unless project policy changes. Only commit redrawn PNGs under this directory and the scripts/README here.
