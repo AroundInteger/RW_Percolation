@@ -67,7 +67,7 @@ for ik = 1:numel(KAP)
     cnt  = zeros(1,numel(PGRID));
 
     for si = 1:NS
-        rng(si);                 % reproducible growth, seed convention 1..NS
+        rng(100*si);             % match RW3D_FSS_study / kappa_mixing seed convention
         base = [];               % reset cumulative build per seed
         zeros_run = 0;
         for jp = 1:numel(PGRID)

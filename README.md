@@ -9,7 +9,7 @@ The current paper is the letter and its supplement:
 - `paper_drafts/prl_letter.tex`
 - `paper_drafts/supplemental.tex`
 - `paper_drafts/prl_combined.tex` (the same text in one file)
-- `paper_drafts/figures_v2/`
+- `paper_drafts/figures_v2/` — see [`paper_drafts/figures_v2/README.md`](paper_drafts/figures_v2/README.md) for regeneration commands and gitignored CSV inputs.
 
 `LEDGER.md` records what was archived and why. Superseded drafts live under `archive/legacy_pre_fss/` and are not current results.
 

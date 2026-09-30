@@ -1,47 +1,91 @@
 #!/usr/bin/env python3
-"""fig1 — alpha(p) for the random (kappa=0) network, two growth series
-(Random percolation, Density increment) from universality_class_analysis.csv,
-in the shared figure system."""
-import sys, csv
+"""fig1 — alpha(p) for random (kappa=0): band (letter) and error-bar variants."""
 import os
-HERE=os.path.dirname(os.path.abspath(__file__))
-ROOT=os.path.abspath(os.path.join(HERE,'..','..'))  # repo root from paper_drafts/figures_v2/
-sys.path.insert(0,HERE)
-import numpy as np, rw_figstyle as S
+import sys
+HERE = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
+sys.path.insert(0, HERE)
+import numpy as np
+import rw_figstyle as S
 S.apply()
 import matplotlib.pyplot as plt
-from matplotlib.lines import Line2D
+from kappa_alpha_common import (
+    load_kappa_rows,
+    draw_kappa_curve_band,
+    draw_kappa_curve_errbars,
+    style_alpha_panel,
+    fss_pc_inf_kappa0,
+)
 
-rows=list(csv.DictReader(open(os.path.join(ROOT,'matlab/Clusters/universality_class_analysis.csv'))))
-def series(name):
-    d=sorted((float(r['p_value']),float(r['alpha'])) for r in rows if r['variant']==name)
-    p,a=zip(*d); return np.array(p),np.array(a)
-pR,aR=series('Random_Percolation')
-pD,aD=series('Density_Increment')
-def cross(p,a):
-    for i in range(len(a)-1):
-        if a[i]>=0.5>=a[i+1]:
-            t=(a[i]-0.5)/(a[i]-a[i+1]); return p[i]+t*(p[i+1]-p[i])
-    return np.nan
-pcR,pcD=cross(pR,aR),cross(pD,aD)
+BERNOULLI_PC = 0.6884
+KAPPA0 = 0.0
+PANELS = [(0, 1, '(a) Full range'), (0.6, 1.0, '(b) Critical region')]
 
-fig,axs=plt.subplots(1,2,figsize=(11,4.6))
-for ax,(lo,hi,ttl) in zip(axs,[(0,1,'(a) Full range'),(0.55,0.82,'(b) Critical region')]):
-    ax.plot(pR,aR,'-o',ms=4,lw=1.9,color=S.ACCENT_BLUE,zorder=4)
-    ax.plot(pD,aD,'-s',ms=4,lw=1.9,color=S.ACCENT_ORANGE,zorder=3)
-    S.criterion_line(ax,0.5)
-    ax.axvline(0.6884,ls=':',lw=1.2,color=S.REF_GREY,alpha=0.9,zorder=2)
-    ax.set_xlim(lo,hi); ax.set_ylim(-0.05,1.12)
-    ax.set_xlabel(S.XLABEL_P); ax.set_title(ttl,fontsize=12)
-axs[0].set_ylabel(S.YLABEL_ALPHA)
-axs[0].text(0.03,1.05,'Sol (Fickian)',fontsize=9.5,color=S.REF_GREY)
-axs[0].text(0.85,0.06,'Gel (arrested)',fontsize=9.5,color=S.REF_GREY,ha='center')
-axs[1].annotate(r"$p_c'\approx0.688\approx1-p_c$",xy=(0.6884,0.5),xytext=(0.575,0.74),
-    fontsize=10,color=S.REF_GREY,arrowprops=dict(arrowstyle='->',color=S.REF_GREY,lw=1.1))
-handles=[Line2D([],[],color=S.ACCENT_BLUE,marker='o',ms=5,lw=1.9,label='Random percolation'),
-         Line2D([],[],color=S.ACCENT_ORANGE,marker='s',ms=5,lw=1.9,label='Density increment'),
-         Line2D([],[],color='black',ls='--',lw=1.3,label=r'$\alpha=0.5$ (gel criterion)')]
-axs[0].legend(handles=handles,loc='center left',fontsize=9.5)
-fig.tight_layout()
-fig.savefig('fig1_random_alpha_vs_p.png')
-print('saved fig1 ; pcR=%.4f pcD=%.4f'%(pcR,pcD))
+
+def _decorate_critical(ax, pcR, pc_inf, col):
+    if pcR == pcR:
+        ax.annotate(
+            r"$p_c'=%.3f$ at $L=500$" % pcR,
+            xy=(pcR, 0.5), xytext=(0.62, 0.72),
+            fontsize=10, color=col,
+            arrowprops=dict(arrowstyle='->', color=col, lw=1.1),
+        )
+    if pc_inf == pc_inf:
+        ax.text(
+            0.605, 0.88,
+            r"FSS: $p_c'(\infty)\approx%.3f$" % pc_inf,
+            fontsize=9.5, color=S.REF_GREY,
+        )
+    ax.text(
+        BERNOULLI_PC + 0.008, 0.08,
+        r'$1-p_c=%.4f$' % BERNOULLI_PC,
+        fontsize=9, color=S.REF_GREY, rotation=90, va='bottom',
+    )
+
+
+def build_fig1(rows, pv, pc_inf, mode='band'):
+    """mode: 'band' (letter default) or 'errbars' (comparison)."""
+    fig, axs = plt.subplots(1, 2, figsize=(11, 4.6))
+    pcR = np.nan
+    col = S.kappa_color(KAPPA0)
+    for j, (ax, (lo, hi, ttl)) in enumerate(zip(axs, PANELS)):
+        if mode == 'band':
+            pcR = draw_kappa_curve_band(ax, rows, pv, KAPPA0)
+        else:
+            step = 2 if j == 0 else 1
+            pcR = draw_kappa_curve_errbars(
+                ax, rows, pv, KAPPA0, subsample=step,
+            )
+        style_alpha_panel(ax, lo, hi, ttl)
+        ax.axvline(
+            BERNOULLI_PC, ls=':', lw=1.1, color=S.REF_GREY, alpha=0.75, zorder=1,
+        )
+
+    axs[0].set_ylabel(S.YLABEL_ALPHA)
+    if mode == 'band':
+        axs[0].text(
+            0.03, 0.12, r'$\pm 1\sigma$, $N_s=3$ lattices',
+            fontsize=9, color=col, transform=axs[0].transAxes,
+        )
+
+    _decorate_critical(axs[1], pcR, pc_inf, col)
+
+    sm = S.kappa_mappable(0, 1)
+    cb = fig.colorbar(sm, ax=axs, pad=0.015, fraction=0.045)
+    cb.set_label(S.XLABEL_KAPPA, fontsize=12)
+    fig.tight_layout()
+    return fig, pcR
+
+
+rows, pv, _ = load_kappa_rows(ROOT)
+pc_inf = fss_pc_inf_kappa0(ROOT)
+
+for mode, fname in (
+    ('band', 'fig1_random_alpha_vs_p.png'),
+    ('errbars', 'fig1_random_alpha_vs_p_errbars.png'),
+):
+    fig, pcR = build_fig1(rows, pv, pc_inf, mode=mode)
+    out = os.path.join(HERE, fname)
+    fig.savefig(out, bbox_inches='tight')
+    plt.close(fig)
+    print('saved', out, '; mode=%s pcL=%.4f pc_inf=%s' % (mode, pcR, pc_inf))

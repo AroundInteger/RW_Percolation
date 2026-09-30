@@ -31,6 +31,11 @@ MODE = 'quick'; RW3D_FSS_study
 %     -r "RW3D_FSS_study; exit" > fss_study.log 2>&1 &
 
 analyze_FSS      % after the run completes (resumable — re-run any time)
+
+% Phase A follow-ups (re-read saved MSD .mat; no new walkers unless noted):
+alpha_window_sensitivity   % M4 — p_c'(inf) vs fit-window choice
+void_geom_FSS_kappa0       % B1 — geometric p_c'(L) at kappa=0 across FSS sizes
+void_percolation_threshold % geometric p_c'(kappa) at L=500 (uses rng(100*seed))
 ```
 
 Resumable: existing per-`(condition,L,p,seed)` `.mat` files are skipped, so a killed run
@@ -40,13 +45,17 @@ picks up where it left off.
 
 - `fss_alpha_table.csv/.mat` — α(p,L) for every condition/size/seed
 - `fss_pcL_table.csv` — pc′(L) and logistic width w(L) per (condition, L)
-- `fss_nu_summary.csv` — pc′(∞), ν_shift, ν_width, ν_collapse per condition
+- `fss_nu_summary.csv` — pc′(∞), ν_shift(+CI), ν_width(+CI), ν_collapse(+CI), collapse_sse; fixed-ν (0.88 / 1.50) pc′(∞) & R²
+- `fss_nu_R2_curve.csv` — full R²(ν) grid for p′_c(L) shift fits (rows at ν = 0.88, 1.50 flagged)
 - `fss_pcL_fits.png` — pc′(L) vs L^(−1/ν) with fits
-- `fss_nu_of_kappa.png` — ν(κ) with error bars (flat = one class; sloped = κ-dependent exponents)
+- `fss_nu_of_kappa.png` — ν(κ): shift, width & collapse estimators with jackknife bars
+- `alpha_window_pcL.csv`, `alpha_window_summary.csv` — M4 window sensitivity (from `alpha_window_sensitivity`)
+- `void_geom_fss_kappa0.csv` — per-seed geometric pc′_geom(L) at κ = 0 (long: L, seed, pc_geom_z)
+- `void_geom_fss_kappa0_summary.csv` — mean ± std of pc′_geom(L) per L (from `void_geom_FSS_kappa0`)
 
 ## Reading the result
 
-- **Sanity check:** random (κ=0) ν_shift should land near **0.88** (3D percolation). If it doesn't, something's off before you trust anything else.
+- **Sanity check:** random (κ=0) pc′(∞) should sit near **1 − p_c ≈ 0.688**. Compare R²_p88 vs R²_150 in `fss_nu_summary.csv` (and the full curve in `fss_nu_R2_curve.csv`) to see which fixed ν the shift data prefer.
 - **Two classes?** Compare κ=0 vs templated-6N ν across all three estimators.
 - **The κ question:** ν(κ) **flat** → one universality class, κ tunes a *non-universal* threshold (conservative story). ν(κ) **sloped** → κ-dependent exponents (bold story) — only claim this if the three estimators agree tightly.
 - **κ=1 (Eden):** pc′→1, single cluster — not a conventional critical point. Reported as a **bound**, not a class exponent.
